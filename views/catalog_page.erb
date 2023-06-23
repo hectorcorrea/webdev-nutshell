@@ -1,0 +1,13 @@
+<head>
+  <style>
+    h1 { border-bottom: 1px solid; }
+  </style>
+</head>
+<body>
+  <h1>Our catalog</h1>
+  <ul>
+    <% @books.each do |book| %>
+      <li><a href="/catalog/<%= book[:id] %>"><%= book[:title]%></a></li>
+    <% end %>
+  </ul>
+</body>
