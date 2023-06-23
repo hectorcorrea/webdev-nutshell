@@ -5,13 +5,13 @@ To run the code in this repo you'll need to clone it and install Sinatra on your
 ```
 git clone https://github.com/hectorcorrea/webdev-nutshell.git
 cd webdev-nutshell
-$ gem install sinatra
+gem install sinatra
 ```
 
 and then you can run the demo with the following command:
 
 ```
-$ ruby webdemo1.rb
+ruby webdemo1.rb
 ```
 
 With the demo running, point your browser to http://localhost:4567/hello
@@ -27,7 +27,7 @@ File `webdemo2.rb` has another example that shows that you can execute Ruby code
 To execute this demo run:
 
 ```
-$ ruby webdemo2.rb
+ruby webdemo2.rb
 ```
 
 and then point your browser to http://localhost:4567/hello you'll notice that it rendered the file from `views/hello_page.erb`
