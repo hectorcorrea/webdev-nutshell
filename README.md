@@ -6,6 +6,10 @@ To run the code in this repo you'll need to clone it and install Sinatra on your
 git clone https://github.com/hectorcorrea/webdev-nutshell.git
 cd webdev-nutshell
 gem install sinatra
+
+# gem install thin
+gem install webrick
+
 ```
 
 and then you can run the demo with the following command:
