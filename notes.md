@@ -23,7 +23,7 @@ docker build -t ruby-image .
 
 Create the Docker container
 ```
-docker create --name ruby-server --publish 0.0.0.0:3000:3000 ruby-image
+docker create --name ruby-server --publish 3000:3000 ruby-image
 ```
 
 Start the container
@@ -38,6 +38,7 @@ https://stackoverflow.com/a/31143261/446681
 ```
 docker run -dit -p 8983:8983 --name ruby-server ruby-image
 docker run -dit --publish 0.0.0.0:3000:3000 --name ruby-server ruby-image
+docker run -dit -p 3000:3000 --name ruby-server ruby-image
 
 
 ```
