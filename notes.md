@@ -1,20 +1,4 @@
-
-# Ruby official container
-
-https://hub.docker.com/_/ruby
-
-
-Dockerfile
-
-```
-FROM ruby:3.0
-WORKDIR /usr/src/app
-# CMD ["./your-daemon-or-script.rb"]
-# ENV PORT 3000
-# EXPOSE $PORT
-ENTRYPOINT [ "/bin/bash" ]
-```
-
+# Creating a Docker container with Ruby on it
 
 Create the docker image
 ```
@@ -27,38 +11,13 @@ docker create --name ruby-server --publish 3000:3000 ruby-image
 ```
 
 Start the container
-This starts it and exits immediately (!!!)
 ```
-docker start webdev-nutshell
+docker start ruby-server
 ```
-
-
-Start the container (detached iteractive)
-https://stackoverflow.com/a/31143261/446681
-```
-docker run -dit -p 3000:3000 --name ruby-server ruby-image
-
-
-```
-
 
 SSH into the container
 ```
 docker exec -it ruby-server /bin/bash
-```
-
-
-TODO: Port binding in docker is not working
-See https://stackoverflow.com/questions/54940990/docker-cant-connect-to-container-exposed-port
-
-
-# Docker build
-
-https://docs.docker.com/engine/reference/commandline/build/
-
-```
-docker build - < Dockerfile
-
 ```
 
 
@@ -67,6 +26,18 @@ https://code.visualstudio.com/docs/devcontainers/containers
 https://code.visualstudio.com/docs/devcontainers/tutorial
 https://code.visualstudio.com/docs/devcontainers/create-dev-container
 
+https://containers.dev/implementors/json_reference/
+https://containers.dev/implementors/reference/
+
+# Docker 
+Docker Hub https://hub.docker.com/_/ruby
+Keep container running https://devopscube.com/keep-docker-container-running/
+
+Start the container (detached iteractive) 
+https://stackoverflow.com/a/31143261/446681
+```
+docker run -dit -p 3000:3000 --name ruby-server ruby-image
+```
 
 
 # Misc
