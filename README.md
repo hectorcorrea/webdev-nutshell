@@ -1,15 +1,14 @@
-Demo code for the [Web development in nutshell](https://docs.google.com/presentation/d/1SG0GHzKND0RO6X8LOGVJeqwMFpy1RXY-0Gt7vwm9c6I/edit#slide=id.g25432a504aa_0_5) tiny workshop.
+These are the materials for the Web Development in a Nutshell workshop to be presented at [Wintersession 2024](https://winter.princeton.edu/).
+
 
 To run the code in this repo you'll need to clone it and install Sinatra on your machine. To do this via the Terminal run the following commands:
 
 ```
 git clone https://github.com/hectorcorrea/webdev-nutshell.git
 cd webdev-nutshell
+
 gem install sinatra
-
-# gem install thin
 gem install webrick
-
 ```
 
 and then you can run the demo with the following command:
