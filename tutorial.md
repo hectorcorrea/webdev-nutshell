@@ -249,38 +249,165 @@ When we visit a site, say Wikipedia, our browser issues an HTTP GET request to f
      |                              |
 ```
 
-Most of our examples in this tutorial will issue HTTP GET request to fetch information. When we want to send information to a server (as opossed to just fetching a web page) we will use HTTP POST requests. More on that later.
+We can think of HTTP as the glue between the client-side and the server-side of an application since this is the language that connects the two.
+
+    **Delete???** Most of our examples in this tutorial will issue HTTP GET request to fetch information. When we want to send information to a server (as opossed to just fetching a web page) we will use HTTP POST requests. More on that later.
+
+
+## Server-side
+
+So far all our examples that we have worked on showed the client-side of a web application. In the next section we are going to dive into the server-side of the application.
+
+The code for the server side can be written in many diffent kind of languages: Ruby, Python, PHP, Java, C#, Go, and others.
+
+For this workshop we are going to use Ruby.
+
+The server-side of a web application receives the requests from the client (e.g. I want to view the content of this page), figures out what is the content appropriated for that request, builds an HTML page with that content, and sends it back to the browser. On the client-side the browser (as we have seen) knows how to render an HTML page.
+
+
+## Installing Ruby
+
+Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker to create and launch a container with Ruby already preinstalled.
+
+    Note: This section of the workshop is *by far* the more complicated part because it requires that you to have Docker running, click a bunch of options within Visual Studio Code, and hope everything install correctly. But once we get this going it will be fun again.
+
+From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container" then "From Dockerfile", and then click "OK" (no need to select any features).
+
+At this point VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the very first time you do it (it'll be a bit faster after that). You can click on the "Starting Dev Container (show log)" link to view the progress.
+
+Once it finishes click on the "Terminal" menu and select "New Terminal". This will open a "terminal" window at the bottom of the screen and it show a prompt that will look like this:
+
+```
+root@1a2b3c4d:/workspaces/webdev-nutshell#
+```
+
+The number `1a2b3c4d` will be different on your installation but that's OK.
+
+Once you are on this prompt type `ruby --version` and you should see that Ruby 3.0 is installed on this container:
+
+```
+root@1a2b3c4d:/workspaces/webdev-nutshell# ruby --version
+ruby 3.0.6p216 (2023-03-30 revision 23a532679b) [x86_64-linux]
+```
+
+On this same prompt run the command `ruby hello.rb` and look at the output. You can see the code for `hello.rb` file from VS Code, it will be a single line of code:
+
+```
+puts "Hello world from a Ruby program"
+```
+
+Then look at the code of `demo1.rb`, what do you think this one does? Run it via `ruby demo1.rb` to find out.
+
+If you are new to Ruby the [Ruby in Twenty Minutes](https://www.ruby-lang.org/en/documentation/quickstart/) guide might be a good place for you to start and learn a little it about the language.
+
 
 ## Server-side code with Ruby
 
+The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install two additional Ruby tools (`gems` in the Ruby parlance):
 
+* [Sinatra](https://sinatrarb.com/) - a small library that makes writting web applications in Ruby easier
+* [WEBrick](https://github.com/ruby/webrick) - a tiny small web server for Ruby that handles some of the HTTP plumbing that is required in a web application
+
+To install Sinatra run the following command from your VS Code Terminal window:
+
+```
 gem install sinatra
-gem install webrick
+
+  > You'll see the following output
+  > Fetching ...
+  > Fetching sinatra-3.1.0.gem
+  > Fetching rack-2.2.8.gem
+  > Successfully installed rack-2.2.8
+  > Successfully installed sinatra-3.1.0
+  > 6 gems installed
 ```
 
-and then you can run the demo with the following command:
+and then to install WEBrick run the following command on your Terminal window:
+
+```
+gem install webrick
+
+  > You'll see the following output
+  > Fetching webrick-1.8.1.gem
+  > Successfully installed webrick-1.8.1
+  > 1 gem installed
+```
+
+Now that we have these two `gems` installed we can run our first web application in Ruby:
 
 ```
 ruby webdemo1.rb
+
+  > You'll see the following output
+  > [2023-12-15 01:30:52] INFO  WEBrick 1.8.1
+  > [2023-12-15 01:30:52] INFO  ruby 3.0.6 (2023-03-30) [x86_64-linux]
+  > == Sinatra (v3.1.0) has taken the stage on 3000 for development with backup from WEBrick
+  > [2023-12-15 01:30:52] INFO  WEBrick::HTTPServer#start: pid=7584 port=3000
 ```
 
-With the demo running, point your browser to http://localhost:4567/hello
+now that the Ruby web application is running we can access with our browser by going to http://localhost:3000/ - notice how we are using a `http://` URL rather than a `file://` URL like we did before.
 
-`webdemo1.rb` only supports a single URL (`/hello`) but it is a "web app" in the sense that there is a Ruby program acting as the server.
-
-Stop the "server" with CTRL+C on your terminal.
-
-## webdemo2.rb
-
-File `webdemo2.rb` has another example that shows that you can execute Ruby code, render HTML from external files, and use Ruby code to generate the HTML.
-
-To execute this demo run:
+This application is rather underwhelming but it is showing a Ruby program is accepting HTTP connections from a browser and returning a valid HTML that the browser can render. You can view the code for this tiny application in `webdemo1.rb`:
 
 ```
-ruby webdemo2.rb
+require "sinatra"
+
+set :port, 3000
+set :bind, '0.0.0.0','localhost'
+disable :strict_paths
+
+get("/") do
+  # Render a hard-coded HTML string
+  html = "<h1>Welcome to your first web app</h1><p>You are on your way to beat Google :)</h1>"
+  return html
+end
 ```
 
-and then point your browser to http://localhost:4567/hello you'll notice that it rendered the file from `views/hello_page.erb`
+The important thing about this application is that we could put it on a different server (rather than on our own laptop) and make it available for the world to access, say via a URL like `http://my-first-ruby-application.org`
+
+For now, type `CTRL-C` from your terminal to shut down this application. You'll see the following output in the terminal:
+
+```
+^C== Sinatra has ended his set (crowd applauds)
+[2023-12-15 02:01:57] INFO  going to shutdown ...
+[2023-12-15 02:01:57] INFO  WEBrick::HTTPServer#start done.
+```
+
+and if you refresh your browser pointing to http://localhost:3000/ your browser will report that it cannot connect to it anymore, which makes sense, we just shut it down.
+
+## Sinatra views
+
+Our previous example has a hard-code string with HTML right in our Ruby code. This is OK for a simple demo but not very convenient in the long run. Sinatra allows us to move our HTML outside the Ruby code into an ERB file, which is similar to an HTML file but with some extra features.
+
+If we look at the code in `webdemo2.rb` you'll notice that in addition to having the HTML hard-coded right there and then there is a second block of code that loads an ERB view called `fancy.erb`:
+
+```
+get("/fancy") do
+  # Render the HTML on ./views/fancy.erb
+  erb(:fancy)
+end
+```
+
+By default the ERB file is expected to be found in the `./views` folder. In fact you can open this file in VS Code and you'll notice that is an almost identical copy to the `hello_world_fancy.html` that we used at the beginning of the workshop.
+
+We can run this new demo by running `ruby webdemo2.rb` from the Terminal window and pointing our browser again to http://localhost:3000
+
+Notice how it looks just like our previous `hello_world_fancy.html` page, but again, this time the page is served via HTTP (rather than via the file system).
+
+Another thing that is not obvious in the code but that is important to notice is the page rendered at http://localhost:3000/fancy is using some CSS styling, but if there are is `<style>...</style>` section defined in our `fancy.erb` file. Where is this style coming from?
+
+Sinatra uses the concept of a "layout" page that is used as the base for any other ERB file rendered. You can view the code for it under `./views/layout.erb`. Notice that this page is an skeleton of a page with everything but a `<body>`, in fact the body looks like this:
+
+```
+<body>
+  <%= yield %>
+</body>
+```
+
+Sinatra will render everything in the `layout.erb` file and when it sees the `<%= yield %>` directive it will embed the content of our `fancy.erb` as part of output. For more information about layout checkout [this blog post](https://medium.com/arren-alexander/adding-css-to-your-sinatra-project-f82190e26ca0).
+
+
+## Sinatra routes
 
 If you point your browser to http://localhost:4567/catalog you'll notice that it renders the content of the file under `./views/ctalog_page.erb` and mixed in the data defined in the Ruby variable `@books`.
 
@@ -336,4 +463,3 @@ If you don't have a GitHub account download this file https://github.com/hectorc
 ## JavaScript
 
 JavaScript on the client-side.
-
