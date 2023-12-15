@@ -13,6 +13,6 @@ get("/") do
 end
 
 get("/fancy") do
-  # Render the HTML on ./views/fancy.erb
+  # Render the HTML found on ./views/fancy.erb
   erb(:fancy)
 end

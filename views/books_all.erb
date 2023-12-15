@@ -1,0 +1,10 @@
+<body>
+  <h1>Books</h1>
+  <p>A list of books</p>
+  <ul>
+    <% @books.each do |book| %>
+      <li><a href=books/<%= book[:id] %>><%= book[:title] %></a></li>
+    <% end %>
+  </ul>
+  <p>And it links back to our <a href="/">welcome page</a>.</p>
+</body>

@@ -5,7 +5,7 @@ Broadly speaking a "web application is software that runs in your web browser" (
 
 Browsers *run* these applications by making requests to a server, processing the responses from the server, and rendering them on your machine.
 
-There are many technologies that are involved in a web application (e.g. HTML, CSS, HTTP, web servers, backend code) and each of these technologies can be a workshop of their own, but the idea of this workshop is to give you a *high level* overview of how these technologies fit on the overall picture and how they interact with each other.
+There are many technologies involved in a web application (e.g. HTML, CSS, JavaScript, HTTP, web servers, backend code) and each of these technologies can be a workshop of their own. The idea of this workshop is to give you a *high level* overview of how these technologies fit on the overall picture and how they interact with each other.
 
 For the most part a web application is divided in two parts: client-side and server-side:
 
@@ -229,9 +229,6 @@ The file protocol is fine for loading simple HTML pages from our local disk, but
 
 HTTP stands for [Hypertext Transfer Protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP) and it's a network protocol that the browser uses to communicate with other servers.
 
-> Note: HTTPS is the encrypted version of HTTP, the "S" stands for Secure.
-> For the purposes of this workshop they are interchangeable.
-
 When we visit a site, say Wikipedia, our browser issues an HTTP GET request to fetch a page from `wikipedia.org`. When the `wikipedia.org` server receives our request it builds an HTML page and sends it back to our browser (as an HTTP response). Our browser then parses the HTML and renders it for us to view. The following diagram shows this sequence:
 
 ```
@@ -249,33 +246,40 @@ When we visit a site, say Wikipedia, our browser issues an HTTP GET request to f
      |                              |
 ```
 
-We can think of HTTP as the glue between the client-side and the server-side of an application since this is the language that connects the two.
+A network protocol is a set of rules that define how computers in a network can communicate with each other. In the example above the browser could be running on a Windows laptop or an Apple iPhone, and the Wikipedia server could be a Linux computer. A network protocol, like HTTP, is what allows these computers to communicate with each other, despite the fact that they are using entirely different hardware, running different operating systems, and located in locations around the world.
+
+To learn more about HTTP check out the [tutorials on the Mozilla website](https://developer.mozilla.org/en-US/docs/Web/HTTP) and the post [What is a protocol?](https://www.cloudflare.com/learning/network-layer/what-is-a-protocol/) at Cloudflare.
+
+> Note: In most web applications these days you'll see HTTPS instead of HTTP.
+> HTTPS is the encrypted version of HTTP, the "S" stands for Secure.
+> For the purposes of this workshop they are interchangeable.
+
 
 ## Server-side
 
 So far all our examples have shown the client-side of a web application. In the next section we are going to dive into the server-side of the application.
 
-The code for the server side can be written in many diffent kind of languages: Ruby, Python, PHP, Java, C#, Go, and others.
+The server-side of a web application receives the requests from the client (e.g. somebody wants to view the content of this page), figures out what is the content appropriated for that request, builds an HTML page with that content, and sends it back to the browser. On the client-side the browser (as we have seen) knows how to render an HTML page.
 
-For this workshop we are going to use Ruby.
+The code for the server-side can be written any programming language: Ruby, Python, PHP, Node.js, Java, C#, Go, and others. For this workshop we are going to use Ruby.
 
-The server-side of a web application receives the requests from the client (e.g. I want to view the content of this page), figures out what is the content appropriated for that request, builds an HTML page with that content, and sends it back to the browser. On the client-side the browser (as we have seen) knows how to render an HTML page.
+Keep in mind that, regardless of the programming language that you use on the server-side, the goal is to produce a string with HTML that will be send back to the browser.
 
 
 ## Installing Ruby
 
-Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker download a container with Ruby already preinstalled.
+Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker to download a container with Ruby already preinstalled.
 
     Note: This section of the workshop is *by far* the more complicated part
     because it requires that you to have Docker running, click a bunch of
-    options within Visual Studio Code, and hope everything install correctly.
+    options within Visual Studio Code, and hope everything installs correctly.
     But once we get this going it will be fun again.
 
 From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container" then "From Dockerfile", and then click "OK" (no need to select any features).
 
-At this point VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the very first time you do it (it'll be a bit faster after that). You can click on the "Starting Dev Container (show log)" link to view the progress.
+At this point VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the first time you do it, it'll be a bit faster after that. You can click on the "Starting Dev Container (show log)" link to view the progress.
 
-Once it finishes click on the "Terminal" menu and select "New Terminal". This will open a "terminal" window at the bottom of the screen and it show a prompt that will look like this:
+Once it finishes click on the "Terminal" menu and select "New Terminal". This will open a Terminal window at the bottom of the screen and it will show a prompt that looks like this:
 
 ```
 root@1a2b3c4d:/workspaces/webdev-nutshell#
@@ -303,17 +307,18 @@ If you are new to Ruby the [Ruby in Twenty Minutes](https://www.ruby-lang.org/en
 
 ## Server-side code with Ruby
 
-The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install two additional Ruby tools (`gems` in the Ruby parlance):
+The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install two additional Ruby tools, or `gems` as they are known in the Ruby parlance:
 
-* [Sinatra](https://sinatrarb.com/) - a small library that makes writting web applications in Ruby easier
-* [WEBrick](https://github.com/ruby/webrick) - a tiny small web server for Ruby that handles some of the HTTP plumbing that is required in a web application
+* [Sinatra](https://sinatrarb.com/) - a library for creating web applications in Ruby
+* [WEBrick](https://github.com/ruby/webrick) - a library that handles the HTTP plumbing required in a web application
 
-To install Sinatra run the following command from your VS Code Terminal window:
+To install **Sinatra** run the following command from your VS Code Terminal window:
 
 ```
 gem install sinatra
 
   > You'll see the following output
+  >
   > Fetching ...
   > Fetching sinatra-3.1.0.gem
   > Fetching rack-2.2.8.gem
@@ -322,12 +327,13 @@ gem install sinatra
   > 6 gems installed
 ```
 
-and then to install WEBrick run the following command on your Terminal window:
+and then to install **WEBrick** run the following command on your Terminal window:
 
 ```
 gem install webrick
 
   > You'll see the following output
+  >
   > Fetching webrick-1.8.1.gem
   > Successfully installed webrick-1.8.1
   > 1 gem installed
@@ -339,15 +345,16 @@ Now that we have these two `gems` installed we can run our first web application
 ruby webdemo1.rb
 
   > You'll see the following output
+  >
   > [2023-12-15 01:30:52] INFO  WEBrick 1.8.1
   > [2023-12-15 01:30:52] INFO  ruby 3.0.6 (2023-03-30) [x86_64-linux]
   > == Sinatra (v3.1.0) has taken the stage on 3000 for development with backup from WEBrick
   > [2023-12-15 01:30:52] INFO  WEBrick::HTTPServer#start: pid=7584 port=3000
 ```
 
-now that the Ruby web application is running we can access with our browser by going to http://localhost:3000/ - notice that this time we are using an `http://` URL rather than a `file://` URL.
+while the application is running we can access it with our browser by going to http://localhost:3000/ - notice that this time we are using an `http://` URL instead of a `file://` URL.
 
-This application is rather underwhelming but it is showing a Ruby program is accepting HTTP connections from a browser and returning a valid HTML that the browser can render. You can view the code for this tiny application in `webdemo1.rb`:
+This application is rather underwhelming but it is showing a Ruby program is accepting HTTP requests from a browser and returning valid HTML that the browser can render. You can view the code for this tiny application in `webdemo1.rb`:
 
 ```
 require "sinatra"
@@ -358,12 +365,13 @@ disable :strict_paths
 
 get("/") do
   # Render a hard-coded HTML string
-  html = "<h1>Welcome to your first web app</h1><p>You are on your way to beat Google :)</h1>"
+  html = "<h1>Welcome to your first web app</h1>"
+  html += "<p>You are on your way to beat Google :)</p>"
   return html
 end
 ```
 
-The important thing about this application is that we could put it on a different server (rather than on our own laptop) and make it available for the world to access, say via a URL like `http://my-first-ruby-application.org`
+The important thing about this application is that we could put it on a different server (rather than on our own laptop) and make it available for the world to access, say via a URL like `http://my-first-ruby-application.org`. We are not going to this now, but the fact that this application uses HTTP as its communication protocol and produces HTML means that we could.
 
 For now, type `CTRL-C` from your terminal to shut down this application. You'll see the following output in the terminal:
 
@@ -373,13 +381,14 @@ For now, type `CTRL-C` from your terminal to shut down this application. You'll 
 [2023-12-15 02:01:57] INFO  WEBrick::HTTPServer#start done.
 ```
 
-and if you refresh your browser pointing to http://localhost:3000/ your browser will report that it cannot connect to it anymore, which makes sense, we just shut it down.
+if you refresh your browser pointing to http://localhost:3000/ the browser will report that it cannot connect to it anymore, which makes sense, we just shut it down.
+
 
 ## Sinatra views
 
 Our previous example has a hard-code string with HTML right in our Ruby code. This is OK for a simple demo but not very convenient in the long run. Sinatra allows us to move our HTML outside the Ruby code into an ERB file, which is similar to an HTML file but with some extra features.
 
-If we look at the code in `webdemo2.rb` you'll notice that in addition to having the HTML hard-coded right there and then there is a second block of code that loads an ERB view called `fancy.erb`:
+If we look at the code in `webdemo2.rb` you'll notice that in addition to having the HTML hard-coded like the previous demo, there is also *a second block of code* that loads an ERB view called `fancy.erb`:
 
 ```
 get("/fancy") do
@@ -390,7 +399,7 @@ end
 
 By default the ERB file is expected to be found in the `./views` folder. In fact you can open this file in VS Code and you'll notice that is an almost identical copy to the `hello_world_fancy.html` that we used at the beginning of the workshop.
 
-We can run this new demo by running `ruby webdemo2.rb` from the Terminal window and pointing our browser again to http://localhost:3000
+We can run this new demo by running `ruby webdemo2.rb` from the Terminal window and pointing our browser again to http://localhost:3000/fancy
 
 Notice how it looks just like our previous `hello_world_fancy.html` page, but again, this time the page is served via HTTP (rather than via the file system).
 
@@ -406,8 +415,50 @@ Sinatra uses the concept of a *layout* page that is used as the base for any oth
 
 Sinatra will render everything in the `layout.erb` file and when it sees the `<%= yield %>` directive it will embed the content of our `fancy.erb` as part of output. For more information about layouts in Sinatra checkout [this blog post](https://medium.com/arren-alexander/adding-css-to-your-sinatra-project-f82190e26ca0).
 
+The `<%= ... %>` syntax in the layout file is something unique to ERB files (i.e. it's not HTML even though it looks like it). When Sinatra sees this syntax is expects the code inside of it to be Ruby code.
+
+For example, let's add the following line to the `./views/fancy.erb` file. You can put it anywhere you want, but a good place is immediately after the `<h1>...</h1>` line:
+
+```
+<p>Today is: <%= DateTime.now.to_date %></p>
+```
+
+This line will add an HTML paragraph `<p>...</p>` and inside of it will insert *the result of the Ruby expression* `DateTime.now.to_date` that is inside the `<%= ... %>`.
+
+Try it, refresh your browser and the http://localhost:3000/fancy page should show you today's date.
+
 
 ## Sinatra routes
+
+A very important part of a web application is the code that figures out how to handle each different URL that is requested. In `webdemo2.rb` we saw two blocks of code to handle two different URLs. There was one block of code to handle requests to http://localhost:3000/ and a different block of code to handle requests for http://localhost:3000/fancy
+
+Notice the `get("/")` and `get("/fancy")` in the code below:
+
+```
+get("/") do
+  # Render a hard-coded HTML string
+  html = "<h1>Welcome to your first web app</h1>"
+  html += "<p>You are on your way to beat Google :)</p>"
+  html += "<p>and it even has a link to our <a href=/fancy>fancy</a> page"
+  return html
+end
+
+get("/fancy") do
+  # Render the HTML found on ./views/fancy.erb
+  erb(:fancy)
+end
+```
+
+These calls are known as [routes](https://sinatrarb.com/intro.html) and there are many kind of routes that we can use in a Sinatra application. For now we'll stick with `get()` routes, but later on we'll review `post()` routes.
+
+    Note: The kind of routes (like get and post) that Sinatra support mimic
+    the kind of requests that the HTTP protocol accepts. A browser issues
+    an HTTP GET when it wants to fetch a web page and an HTTP POST when it
+    wants to pass information to the web server.
+
+Let's go ahead and look at `webdemo3.rb`. Notice how this example has several addition routes.
+
+
 
 If you point your browser to http://localhost:4567/catalog you'll notice that it renders the content of the file under `./views/ctalog_page.erb` and mixed in the data defined in the Ruby variable `@books`.
 
