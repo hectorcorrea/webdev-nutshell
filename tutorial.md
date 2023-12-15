@@ -459,56 +459,10 @@ These calls are known as [routes](https://sinatrarb.com/intro.html) and there ar
 Let's go ahead and look at `webdemo3.rb`. Notice how this example has several addition routes.
 
 
+TODO: If you point your browser to http://localhost:4567/catalog you'll notice that it renders
+the content of the file under `./views/ctalog_page.erb` and mixed in the data defined in the
+Ruby variable `@books`.
 
-If you point your browser to http://localhost:4567/catalog you'll notice that it renders the content of the file under `./views/ctalog_page.erb` and mixed in the data defined in the Ruby variable `@books`.
-
-
-
-## ============================================
-## Misc
-Website or web application?
-A website is typical a site that only delivers static information, whereas a web applications have interactive user elements.
-Web application vs native app
-“Unlike web apps, native or mobile apps are downloaded by the user to their mobile device, usually through app stores.”
-
-Reference: https://aws.amazon.com/what-is/web-application/
-
-
-
-
-## Required software
-For this workshop you'll need to install
-
-* Visual Studio Code (https://code.visualstudio.com/)
-* Docker (https://www.docker.com/)
-
-We'll use Docker to download a container with Ruby installed on it. If you have Ruby already installed on your machine (https://www.ruby-lang.org/en/) you technically don't need Docker.
-
-You can check if Ruby is already installed on your machine by running a command like this:
-
-```
-ruby --version
-
-  # Should display something like
-  # ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [x86_64-darwin22]
-```
-
-## Getting started
-First install the required software indicated in the previous section.
-
-Then, if you have a GitHub account go to https://github.com/hectorcorrea/webdev-nutshell/ and clone the repository
-
-```
-git clone https://github.com/hectorcorrea/webdev-nutshell.git
-
-  # Should display something like
-  # Cloning into 'webdev-nutshell'...
-  # remote: Enumerating objects: 41, done.
-  # ...
-  # Unpacking objects: 100% (41/41), done.
-```
-
-If you don't have a GitHub account download this file https://github.com/hectorcorrea/webdev-nutshell/archive/refs/heads/main.zip and unzip it on your machine.
 
 
 ## JavaScript
