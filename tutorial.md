@@ -251,12 +251,9 @@ When we visit a site, say Wikipedia, our browser issues an HTTP GET request to f
 
 We can think of HTTP as the glue between the client-side and the server-side of an application since this is the language that connects the two.
 
-    **Delete???** Most of our examples in this tutorial will issue HTTP GET request to fetch information. When we want to send information to a server (as opossed to just fetching a web page) we will use HTTP POST requests. More on that later.
-
-
 ## Server-side
 
-So far all our examples that we have worked on showed the client-side of a web application. In the next section we are going to dive into the server-side of the application.
+So far all our examples have shown the client-side of a web application. In the next section we are going to dive into the server-side of the application.
 
 The code for the server side can be written in many diffent kind of languages: Ruby, Python, PHP, Java, C#, Go, and others.
 
@@ -267,9 +264,12 @@ The server-side of a web application receives the requests from the client (e.g.
 
 ## Installing Ruby
 
-Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker to create and launch a container with Ruby already preinstalled.
+Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker download a container with Ruby already preinstalled.
 
-    Note: This section of the workshop is *by far* the more complicated part because it requires that you to have Docker running, click a bunch of options within Visual Studio Code, and hope everything install correctly. But once we get this going it will be fun again.
+    Note: This section of the workshop is *by far* the more complicated part
+    because it requires that you to have Docker running, click a bunch of
+    options within Visual Studio Code, and hope everything install correctly.
+    But once we get this going it will be fun again.
 
 From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container" then "From Dockerfile", and then click "OK" (no need to select any features).
 
@@ -345,7 +345,7 @@ ruby webdemo1.rb
   > [2023-12-15 01:30:52] INFO  WEBrick::HTTPServer#start: pid=7584 port=3000
 ```
 
-now that the Ruby web application is running we can access with our browser by going to http://localhost:3000/ - notice how we are using a `http://` URL rather than a `file://` URL like we did before.
+now that the Ruby web application is running we can access with our browser by going to http://localhost:3000/ - notice that this time we are using an `http://` URL rather than a `file://` URL.
 
 This application is rather underwhelming but it is showing a Ruby program is accepting HTTP connections from a browser and returning a valid HTML that the browser can render. You can view the code for this tiny application in `webdemo1.rb`:
 
@@ -394,9 +394,9 @@ We can run this new demo by running `ruby webdemo2.rb` from the Terminal window 
 
 Notice how it looks just like our previous `hello_world_fancy.html` page, but again, this time the page is served via HTTP (rather than via the file system).
 
-Another thing that is not obvious in the code but that is important to notice is the page rendered at http://localhost:3000/fancy is using some CSS styling, but if there are is `<style>...</style>` section defined in our `fancy.erb` file. Where is this style coming from?
+Another thing that is not obvious in the code but that is important to notice is the page rendered at http://localhost:3000/fancy is using some CSS styling, but there is no `<style>...</style>` section defined in our `fancy.erb` file. Where is this styling coming from?
 
-Sinatra uses the concept of a "layout" page that is used as the base for any other ERB file rendered. You can view the code for it under `./views/layout.erb`. Notice that this page is an skeleton of a page with everything but a `<body>`, in fact the body looks like this:
+Sinatra uses the concept of a *layout* page that is used as the base for any other ERB file rendered. You can view the code for it under `./views/layout.erb`. Notice that this page is an skeleton of a page with everything but a `<body>`, in fact the body looks like this:
 
 ```
 <body>
@@ -404,7 +404,7 @@ Sinatra uses the concept of a "layout" page that is used as the base for any oth
 </body>
 ```
 
-Sinatra will render everything in the `layout.erb` file and when it sees the `<%= yield %>` directive it will embed the content of our `fancy.erb` as part of output. For more information about layout checkout [this blog post](https://medium.com/arren-alexander/adding-css-to-your-sinatra-project-f82190e26ca0).
+Sinatra will render everything in the `layout.erb` file and when it sees the `<%= yield %>` directive it will embed the content of our `fancy.erb` as part of output. For more information about layouts in Sinatra checkout [this blog post](https://medium.com/arren-alexander/adding-css-to-your-sinatra-project-f82190e26ca0).
 
 
 ## Sinatra routes
