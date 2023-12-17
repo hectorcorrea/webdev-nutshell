@@ -21,6 +21,12 @@ class BookDatabase
     book = all.find { |book| book['id'] == id}
   end
 
+  # Returns a new empty book (but it does not save it)
+  def self.create_new
+    book = { "title" => "", "author" => "", "year" => 0 }
+    book
+  end
+
   # Adds a record to the underlying JSON file
   def self.add(id, title, author, year)
     # Calculate the id for the new book...

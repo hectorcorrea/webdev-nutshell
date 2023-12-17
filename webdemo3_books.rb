@@ -7,18 +7,13 @@ disable :strict_paths
 
 get("/") do
   @books = BookDatabase.all
-  puts @books
   erb(:books_list)
 end
 
 get("/books/new") do
   id = params[:id]
-  @book = {
-    "title": "",
-    "author": "",
-    "year": 0
-  }
-  erb(:book_edit)
+  @book = BookDatabase.create_new
+  erb(:book_new)
 end
 
 get("/books/:id/edit") do
@@ -34,21 +29,24 @@ get("/books/:id") do
 end
 
 post("/books/:id/save") do
+  # Get the values submitted on the HTML FORM...
   id = params[:id].to_i
   title = params["title"]
   author = params["author"]
   year = params["year"].to_i
+  # ...update the book in our database
   BookDatabase.update(id, title, author, year)
+  # ...and send the user to the show page for our new book
   redirect "/books/#{id}"
 end
 
 post("/books/new") do
-  # Get the book value passed on the HTML FORM
+  # Get the values submitted on the HTML FORM...
   title = params["title"]
   author = params["author"]
   year = params["year"].to_i
-  # Save the book to our quasi-database
+  # ...add the new the book to our database
   id = BookDatabase.add(id, title, author, year)
-  # Redirect the browser to the show page for our new book
+  # ...and send the user to the show page for our new book
   redirect "/books/#{id}"
 end
