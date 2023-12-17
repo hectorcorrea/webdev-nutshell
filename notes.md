@@ -53,3 +53,4 @@ docker system prune -a -f
 ```
 
 
+favicon - https://favicon.io/
