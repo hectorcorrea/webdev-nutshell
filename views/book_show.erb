@@ -1,22 +1,23 @@
 <body>
   <h1>Book Details</h1>
   <p>
-    Back to the <a href="/">Home Page</a>
-  </p>
-
-  <p>
-    <b>Title:</b> <%= @book['title'] %>
+    <a href="/books/<%= @book['id'] %>/edit"><button>Edit Book</button></a>
+    <a href="/"><button>Home Page</button></a>
   </p>
   <p>
-    <b>Id:</b> <%= @book['id'] %>
+    <b>Title:</b>
+    <%= @book['title'] %>
   </p>
   <p>
-    <b>Author:</b> <%= @book['author'] %>
+    <b>Id:</b>
+    <%= @book['id'] %>
   </p>
   <p>
-    <b>Year:</b> <%= @book['pub_year'] %>
+    <b>Author:</b>
+    <%= @book['author'] %>
   </p>
   <p>
-     <a href="/books/<%= @book['id'] %>/edit">Edit Book</a>
+    <b>Year:</b>
+    <%= @book['year'] %>
   </p>
 </body>

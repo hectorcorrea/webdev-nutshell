@@ -1,14 +1,17 @@
 <body>
-  <h1>Book Details</h1>
+  <h1>Editing Book</h1>
   <form action="/books/<%= @book['id'] %>/save" method="post" >
     <p>
-      <b>Title:</b> <input id="title" name="title" value="<%= @book['title'] %>" />
+      <b>Title:</b>
+      <input id="title" name="title" value="<%= @book['title'] %>" placeholder="Enter book title" />
     </p>
     <p>
-      <b>Author:</b> <input id="author" name="author" value="<%= @book['author'] %>" />
+      <b>Author:</b>
+      <input id="author" name="author" value="<%= @book['author'] %>" placeholder="Enter book author" />
     </p>
     <p>
-      <b>Year:</b> <input id="year" name="year" value="<%= @book['year'] %>" />
+      <b>Year:</b>
+      <input id="year" name="year" value="<%= @book['year'] %>" />
     </p>
     <p>
       <input type="submit" value="Save" />

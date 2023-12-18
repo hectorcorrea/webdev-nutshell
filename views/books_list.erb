@@ -1,12 +1,19 @@
 <body>
-  <h1>Books</h1>
-  <p>A list of books</p>
-  <ul>
-    <% @books.each do |book| %>
-      <li><a href=books/<%= book['id'] %>><%= book['title'] %></a></li>
-    <% end %>
-  </ul>
+  <h1>Book Catalog</h1>
   <p>
-    <a href="/books/new">Add Book</a>
+    <a href="/new-book"><button>New Book</button></a>
   </p>
+
+  <% if @books.count == 0 %>
+    <p>There are no books in our library</p>
+  <% else %>
+    <p>A list of books</p>
+    <ul>
+      <% @books.each do |book| %>
+        <li>
+          <a href=books/<%= book['id'] %>> <%= book['title'] %></a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </body>

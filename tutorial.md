@@ -300,7 +300,7 @@ On this same prompt run the command `ruby hello.rb` and look at the output. You 
 puts "Hello world from a Ruby program"
 ```
 
-Then look at the code of `demo1.rb`, what do you think this one does? Run it via `ruby demo1.rb` to find out.
+Then look at the code of `hello_again.rb`, what do you think this one does? Run it via `ruby hello_again.rb` to find out.
 
 If you are new to Ruby the [Ruby in Twenty Minutes](https://www.ruby-lang.org/en/documentation/quickstart/) guide might be a good place for you to start and learn a little it about the language.
 
@@ -310,7 +310,8 @@ If you are new to Ruby the [Ruby in Twenty Minutes](https://www.ruby-lang.org/en
 The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install two additional Ruby tools, or `gems` as they are known in the Ruby parlance:
 
 * [Sinatra](https://sinatrarb.com/) - a library for creating web applications in Ruby
-* [WEBrick](https://github.com/ruby/webrick) - a library that handles the HTTP plumbing required in a web application
+* [WEBrick](https://github.com/ruby/webrick) - a library that handles the HTTP plumbing
+* [Byebug](https://github.com/deivid-rodriguez/byebug) - a debugger for Ruby
 
 To install **Sinatra** run the following command from your VS Code Terminal window:
 
@@ -327,7 +328,7 @@ gem install sinatra
   > 6 gems installed
 ```
 
-and then to install **WEBrick** run the following command on your Terminal window:
+To install **WEBrick** run the following command on your Terminal window:
 
 ```
 gem install webrick
@@ -339,7 +340,21 @@ gem install webrick
   > 1 gem installed
 ```
 
-Now that we have these two `gems` installed we can run our first web application in Ruby:
+To install **Byebug** run the following command on your Terminal window:
+
+```
+gem install byebug
+
+  > You'll see the following output
+  >
+  > Fetching byebug-11.1.3.gem
+  > Building native extensions. This could take a while...
+  > Successfully installed byebug-11.1.3
+  > 1 gem installed
+
+```
+
+Now that we have these `gems` installed we can run our first web application in Ruby:
 
 ```
 ruby webdemo1.rb
@@ -428,9 +443,9 @@ This line will add an HTML paragraph `<p>...</p>` and inside of it will insert *
 Try it, refresh your browser and the http://localhost:3000/fancy page should show you today's date.
 
 
-## Sinatra routes
+## Sinatra routes (get)
 
-A very important part of a web application is the code that figures out how to handle each different URL that is requested. In `webdemo2.rb` we saw two blocks of code to handle two different URLs. There was one block of code to handle requests to http://localhost:3000/ and a different block of code to handle requests for http://localhost:3000/fancy
+An important part of a web application is the code that figures out how to handle each different URL that is requested. In `webdemo2.rb` we saw two blocks of code to handle two different URLs. There was one block of code to handle requests to http://localhost:3000/ and a different block of code to handle requests for http://localhost:3000/fancy
 
 Notice the `get("/")` and `get("/fancy")` in the code below:
 
@@ -449,19 +464,101 @@ get("/fancy") do
 end
 ```
 
-These calls are known as [routes](https://sinatrarb.com/intro.html) and there are many kind of routes that we can use in a Sinatra application. For now we'll stick with `get()` routes, but later on we'll review `post()` routes.
+These calls are known as [routes](https://sinatrarb.com/intro.html) and there are many kind of routes that we can use in a Sinatra application.
 
-    Note: The kind of routes (like get and post) that Sinatra support mimic
+Let's go ahead and look at `webdemo3_books.rb`. Notice how this example has several additional routes, for example there is one route that looks like this:
+
+```
+get("/books/:id") do
+  id = params[:id].to_i
+  @book = BookDatabase.find(id)
+  erb(:book_show)
+end
+```
+
+The `:id` on the previous route indicates that there is a "named value" that will vary. For example in the URL `/books/1` the `1` will be considered the id while on the URL `/books/759` the `759` will be considered the id. We can access the id of the URL via `params[:id]` as you can see in the code above.
+
+Another important thing to notice in this route is that it declares an instance variable: `@book`. The value of this variable will be visible when Sinatra executes `erb(:book_show)` which means that we can reference `@book` in `book_show.erb`. If we look inside `book_show.erb` there is an HTML fragment that looks like this:
+
+```
+  <p>
+    <b>Title:</b>
+    <%= @book['title'] %>
+  </p>
+```
+
+Notice the line `<%= @book['title'] %>`. Remember that anything between the `<%= ... %>` is Ruby code that will be executed. In this case `@book['title']` is the title of the book in the `@book` variable that we declared in our router.
+
+So far we have only seen `get()` routes in Sinatra. In the next section we'll talk about `post()` routes.
+
+
+## HTTP POST and HTML FORMs
+
+When a browser wants to push information to a web server, for example when we hit "Save" after updating the information of a book, it issues an HTTP POST request to pass the information.
+
+In order for us to tell the browser what information must be passed in the HTTP POST request we use an HTML FORM element.
+
+The way this works in our `webdemo3_books.rb` example is that when the user clicks the "Edit Book" button the browser issues an HTTP GET to render an HTML FORM that allows the user to enter the new values for the book, the code for this route is below:
+
+```
+get("/books/:id/edit") do
+  id = params[:id].to_i
+  @book = BookDatabase.find(id)
+  erb(:book_edit)
+end
+```
+
+There is nothing extraordinary on this route. In fact it looks very similar to the other routes thats we have reviewd. What is new in this code is the HTML that it renders in the `book_edit.erb` view. Below is a section of that HTML:
+
+```
+<body>
+  <form action="/books/<%= @book['id'] %>/save" method="post" >
+    <p>
+      <b>Title:</b>
+      <input id="title" name="title" />
+    </p>
+    ...
+    <p>
+      <input type="submit" value="Save" />
+    </p>
+  </form>
+</body>
+```
+
+This view introduces two new HTML elements: `<FORM>` and `<INPUT>`.
+
+HTML FORMs are a way to group the values that we want to pass to the server. These values are captured via `<INPUT>` elements. There are many kind of `<INPUT>` but in this workshop we will only show "text boxes" `<input ... />` and "submit buttons" `<input type="submit" ... />`.
+
+The HTML FORM element itself has two *attributes*: `action` and `method`. In our example we indicate that we want to use an `HTTP POST` as the method to pass the information to the server and the URL where we will POST these values is `/books/:id/save`. In other words, when the user hits "Save" the browser will issue an `HTTP POST /book/123/save`.
+
+Our `webdemo3_books.rb` has a route to handle this particular HTTP POST request. The code is below:
+
+```
+post("/books/:id/save") do
+  # Get the values submitted on the HTML FORM...
+  id = params[:id].to_i
+  title = params["title"]
+  author = params["author"]
+  year = params["year"].to_i
+
+  # ...update the book in our database
+  BookDatabase.update(id, title, author, year)
+
+  # ...and send the user to the show page for our new book
+  redirect "/books/#{id}"
+end
+```
+
+This method does three things:
+1. It gathers the values that the browser pushed to the server from the `params` variable.
+2. Then it calls the `BookDatabase.update()` method to update the record in our database.
+3. And at the end it sends the user back to the "details page" for the particular book that they edited (i.e. in HTTP lingo, it redirects them).
+
+
+    Note: The kind of routes (like get and post) that Sinatra supports mimic
     the kind of requests that the HTTP protocol accepts. A browser issues
     an HTTP GET when it wants to fetch a web page and an HTTP POST when it
     wants to pass information to the web server.
-
-Let's go ahead and look at `webdemo3.rb`. Notice how this example has several addition routes.
-
-
-TODO: If you point your browser to http://localhost:4567/catalog you'll notice that it renders
-the content of the file under `./views/ctalog_page.erb` and mixed in the data defined in the
-Ruby variable `@books`.
 
 
 

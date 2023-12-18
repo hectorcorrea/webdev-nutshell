@@ -1,14 +1,14 @@
 <body>
   <h1>New Book</h1>
-  <form action="/books/new" method="post" >
+  <form action="/new-book" method="post" >
     <p>
-      <b>Title:</b> <input id="title" name="title" />
+      <b>Title:</b> <input id="title" name="title" placeholder="Enter book title" />
     </p>
     <p>
-      <b>Author:</b> <input id="author" name="author" />
+      <b>Author:</b> <input id="author" name="author" placeholder="Enter book author" />
     </p>
     <p>
-      <b>Year:</b> <input id="year" name="year" />
+      <b>Year:</b> <input id="year" name="year" value="<%= @book['year'] %>" />
     </p>
     <p>
       <input type="submit" value="Save" />

@@ -3,12 +3,30 @@
     "id": 1,
     "title": "Algorithms of Oppression: How Search Engines Reinforce Racism",
     "author": "Noble, Safiya Umoja",
-    "pub_year": 2018
+    "year": 2018
   },
   {
     "id": 2,
-    "title": "Broad Band: The Untold Story of the Women Who Made the Internet ",
+    "title": "Broad Band: The Untold Story of the Women Who Made the Internet",
     "author": "Evans, Claire L.",
-    "pub_year": 2018
+    "year": 2018
+  },
+  {
+    "id": 3,
+    "title": "The Art of Logic in an Illogical World",
+    "author": "Cheng, Eugenia",
+    "year": 2020
+  },
+  {
+    "id": 4,
+    "title": "Escape from Model Land",
+    "author": "Thompson, Erica",
+    "year": 2022
+  },
+  {
+    "id": 5,
+    "title": "Context changes everything",
+    "author": "Juarrero, Alicia",
+    "year": 2023
   }
 ]
