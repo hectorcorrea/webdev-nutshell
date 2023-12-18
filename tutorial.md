@@ -531,6 +531,10 @@ HTML FORMs are a way to group the values that we want to pass to the server. The
 
 The HTML FORM element itself has two *attributes*: `action` and `method`. In our example we indicate that we want to use an `HTTP POST` as the method to pass the information to the server and the URL where we will POST these values is `/books/:id/save`. In other words, when the user hits "Save" the browser will issue an `HTTP POST /book/123/save`.
 
+    Note: When the browser issues the HTTP POST request it passes the values
+    from the `<INPUT>` elements as part of the request that the webserver will
+    receive. This is known as the payload of the request.
+
 Our `webdemo3_books.rb` has a route to handle this particular HTTP POST request. The code is below:
 
 ```
@@ -553,13 +557,6 @@ This method does three things:
 1. It gathers the values that the browser pushed to the server from the `params` variable.
 2. Then it calls the `BookDatabase.update()` method to update the record in our database.
 3. And at the end it sends the user back to the "details page" for the particular book that they edited (i.e. in HTTP lingo, it redirects them).
-
-
-    Note: The kind of routes (like get and post) that Sinatra supports mimic
-    the kind of requests that the HTTP protocol accepts. A browser issues
-    an HTTP GET when it wants to fetch a web page and an HTTP POST when it
-    wants to pass information to the web server.
-
 
 
 ## JavaScript
