@@ -270,10 +270,10 @@ Keep in mind that, regardless of the programming language that you use on the se
 
 Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker to download a container with Ruby already preinstalled.
 
-    Note: This section of the workshop is *by far* the more complicated part
-    because it requires that you to have Docker running, click a bunch of
-    options within Visual Studio Code, and hope everything installs correctly.
-    But once we get this going it will be fun again.
+> Note: This section of the workshop is *by far* the more complicated part
+> because it requires that you to have Docker running, click a bunch of
+> options within Visual Studio Code, and hope everything installs correctly.
+> But once we get this going it will be fun again.
 
 From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container" then "From Dockerfile", and then click "OK" (no need to select any features).
 
@@ -531,9 +531,9 @@ HTML FORMs are a way to group the values that we want to pass to the server. The
 
 The HTML FORM element itself has two *attributes*: `action` and `method`. In our example we indicate that we want to use an `HTTP POST` as the method to pass the information to the server and the URL where we will POST these values is `/books/:id/save`. In other words, when the user hits "Save" the browser will issue an `HTTP POST /book/123/save`.
 
-    Note: When the browser issues the HTTP POST request it passes the values
-    from the `<INPUT>` elements as part of the request that the webserver will
-    receive. This is known as the payload of the request.
+> Note: When the browser issues the HTTP POST request it passes the values
+> from the `<INPUT>` elements as part of the request that the webserver will
+> receive. This is known as the payload of the request.
 
 Our `webdemo3_books.rb` has a route to handle this particular HTTP POST request. The code is below:
 
