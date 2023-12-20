@@ -576,3 +576,18 @@ This method does three things:
 ## JavaScript
 
 JavaScript on the client-side.
+
+Find the controler for the edit page in `webdemo3_books.rb` and replace it with the following code:
+
+```
+# Display the edit form for a single book
+get("/books/:id/edit") do
+  id = params[:id].to_i
+  @book = BookDatabase.find(id)
+  erb(:book_edit_with_validation)
+end
+```
+
+Notice that we are rendering the view `./views/book_edit_with_validation.erb` instead of `./views/book_edit.erb`
+in this updated version.
+

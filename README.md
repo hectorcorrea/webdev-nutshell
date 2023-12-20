@@ -12,8 +12,8 @@ The slides for the workshop be found [here](https://docs.google.com/presentation
 
 * **slides.pdf** is a copy of the slides.
 
-* **hello.rb** and **hello_again.rb** are a tiny Ruby programs, nothing to do with the web.
-* **webdemo1.rb** is the smallest web site in Ruby using Sinatra.
+* **hello.rb** and **hello_again.rb** are tiny Ruby programs, nothing to do with the web.
+* **webdemo1.rb** is a tiny web site in Ruby using Sinatra.
 * **webdemo2.rb** a variation of `webdemo1.rb` that shows how to use views (i.e. ERB files).
 * **webdemo3_books.rb** a more complete web site (also with Sinatra) that allows the user to edit the data.
 
