@@ -567,6 +567,7 @@ end
 ```
 
 This method does three things:
+
 1. It gathers the values that the browser pushed to the server from the `params` variable.
 2. Then it calls the `BookDatabase.update()` method to update the record in our database.
 3. And at the end it sends the user back to the "details page" for the particular book that they edited (i.e. in HTTP lingo, it redirects them).
