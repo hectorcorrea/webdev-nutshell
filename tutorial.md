@@ -1,7 +1,7 @@
 # Web Development in a Nutshell
 
 ## What is a web application?
-Broadly speaking a "web application is software that runs in your web browser" (https://aws.amazon.com/what-is/web-application/)
+Broadly [speaking](https://aws.amazon.com/what-is/web-application/) a "web application is software that runs in your web browser".
 
 Browsers *run* these applications by making requests to a server, processing the responses from the server, and rendering them on your machine.
 
@@ -29,6 +29,12 @@ The browser communicates with the web server via a protocol known as HTTP. When 
      |    to the user                |
      |                               |
 ```
+
+> If this is your first encounter with web development, the Mozilla Developer Network has great
+> tutorials about the [history of the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/The_web_and_web_standards),
+> [how the Internet works](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/How_does_the_Internet_work),
+> and [getting started with the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
+> that are worth checking out.
 
 We'll dive into the details of HTTP at a later point, but to get started let's look closely at HTML first.
 
@@ -198,22 +204,29 @@ This ability to target different elements on our styles is known as CSS Selector
 
 ### CSS - layouts
 
-TBD: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout
+In addition to using CSS to style individual HTML elements on a page, CSS can be used to layout how the elements are positioned in relationship to one another and how they are rearranged on the page when the user resizes their browser window.
+
+CSS provides many ways to layout pages: normal flow, flexbox, grids, and floats to name a few. The Mozilla guide on [CSS Layout](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout) gives a good overview on these different styles.
+
+File `css-column-layout.html` shows an example of how to use the [Multiple-column layout](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Multiple-column_Layout). File `css-grid-layout.html` shows an example of to use realize a common website layout using the [CSS Grid Layout](
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_common_layouts_using_grids)
+
+The talk [Everything You Know About Web Design Just Changed](https://www.youtube.com/watch?v=jBwBACbRuGY) by Jen Simmons is another resource to see how these layout are used and how they have evolved over the years.
 
 
 ### CSS - using an external file
-In our previous examples we inserted the CSS for our page right on the `<head>...</head>` section of the HTML page. Another common way to insert CSS inside a page is to *reference an external file* that has the CSS that we would normally put in the `<style>...</style>` section. For example, let's replace the `<head>...</head>` section of our `hello-world-fancy.html` with the following content:
+In our previous examples we inserted the CSS for our pages right on the `<head>...</head>` section of the HTML page.
+
+Another common way to insert CSS inside a page is to *reference an external file* that has the CSS that we would normally put in the `<style>...</style>` section. For example, let's look at the  `<head>...</head>` section of our `hello-world-bootstrap.html` page, notice that it looks like this:
 
 ```
   <head>
-    <title>Hello (fancy with CSS)</title>
-    <link href="https://hectorcorrea.com/demos/webdev-nutshell/mcss.css" rel="stylesheet" />
+    <title>Hello (bootstrap)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
 ```
 
-Notice how we don't have a `<style>...</style>` section anymore, instead we have `<link>` element that points to a CSS file that lives somewhere else. Refresh the `hello-world-fancy.html` file in your browser and notice how the formatting has changed again, this time using the CSS defined in the external `mcss.css` file.
-
-The styles defined in the `mcss.css` file were created by Mike Mai and you can [read more about it on his web site](https://mikemai.net/mcss/). Be aware that this file uses many advanced features of CSS and it's well beyond what we cover on this workshop.
+The `<link>` element tells the browser to load the CSS styles from the URL indicated. This particular example is using the CSS defined by [Bootstrap](https://getbootstrap.com/) which is a popular toolkit for frontend development. The HTML content in the `hello-world-bootstrap.html` file references several CSS class defined by Bootstrap, notice the `class="container"`, `class="row"`, `class="col"` on that HTML file.
 
 
 ## Leaving file:// behind
