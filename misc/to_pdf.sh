@@ -7,7 +7,7 @@
 pandoc tutorial.md \
 -f markdown \
 -t html -s -o tutorial.html \
--c scripts/pandoc_styles.css \
+-c misc/pandoc_styles.css \
 --toc -V toc-title:"Table of Contents" \
 --metadata pagetitle="Web development in a nutshell workshop"
 

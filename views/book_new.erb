@@ -2,16 +2,20 @@
   <h1>New Book</h1>
   <form action="/new-book" method="post" >
     <p>
-      <b>Title:</b> <input id="title" name="title" placeholder="Enter book title" />
+      <b>Title:</b>
+      <input id="title" name="title" placeholder="Enter book title" />
+      <span id="title-required" class="required-field-message"></span>
     </p>
     <p>
-      <b>Author:</b> <input id="author" name="author" placeholder="Enter book author" />
+      <b>Author:</b>
+      <input id="author" name="author" placeholder="Enter book author" />
     </p>
     <p>
-      <b>Year:</b> <input id="year" name="year" value="<%= @book['year'] %>" />
+      <b>Year:</b>
+      <input id="year" name="year" value="<%= @book['year'] %>" />
     </p>
     <p>
-      <input type="submit" value="Save" />
+      <input id="saveButton" name="saveButton" type="submit" value="Save" />
     </p>
   </form>
 </body>

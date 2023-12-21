@@ -41,7 +41,7 @@ We'll dive into the details of HTTP at a later point, but to get started let's l
 
 ## HTML
 
-HTML stands for [Hypertext Markup Language](https://developer.mozilla.org/en-US/docs/Web/HTML) and is the language that we use to build web pages that the browser renders.
+HTML stands for [Hypertext Markup Language](https://developer.mozilla.org/en-US/docs/Web/HTML) and it's the language that we use to build web pages that the browser renders.
 
 Below is an example of a very basic web page with HTML:
 
@@ -573,21 +573,78 @@ This method does three things:
 3. And at the end it sends the user back to the "details page" for the particular book that they edited (i.e. in HTTP lingo, it redirects them).
 
 
-## JavaScript
+## JavaScript (on the client-side)
+Another common technology that is used in most web pages is JavaScript (JS). JavaScript is a programming language that we can embed in our HMTL files to add dynamic functionality to the page.
 
-JavaScript on the client-side.
+For example, we might want to validate that the value in a particular textbox is not empty on a page or that it matches a specific type of format (e.g. say a phone number). This kind of dynamic behavior on the page can be implemented with JavaScript.
 
-Find the controler for the edit page in `webdemo3_books.rb` and replace it with the following code:
+The topic of JavaScript on the client-side is large and we won't cover the details on this workshop. The [Mozilla JavaScript](
+https://developer.mozilla.org/en-US/docs/Web/javascript) documentation is a great place to learn more about JavaScript.
+
+> Note: This section of the workshop is about using JavaScript on the client-side of a web
+> application. It is also possible to use JavaScript on the backend of a web application
+> via Node.js but that topic is outside of the scope of this workshop.
+
+Let's modify our web application to validate the `title` of the books when somebody *edits* a book. To do this we are going modify the controller to render a different page, instead of using our original `book_edit.erb` page we are going to use `book_edit_with_js.erb`:
 
 ```
 # Display the edit form for a single book
 get("/books/:id/edit") do
   id = params[:id].to_i
   @book = BookDatabase.find(id)
-  erb(:book_edit_with_validation)
+  erb(:book_edit_with_js)
 end
 ```
 
-Notice that we are rendering the view `./views/book_edit_with_validation.erb` instead of `./views/book_edit.erb`
-in this updated version.
+The content of the `./views/book_edit_with_js.erb` view is similar to the one that we had before, but at the bottom of this page we have a new `<script>...</script>` section. This is the JavaScript code that will make the validation:
+
+```
+  <script>
+    /*
+     * When the "saveButton" is clicked...
+     */
+    document.getElementById("saveButton").addEventListener("click", (event) => {
+
+      const titleEl = document.getElementById("title");
+      if (titleEl.value.trim() === "") {
+        const messageEl = document.getElementById("title-required");
+        messageEl.innerHTML = "This field is required";
+        event.preventDefault();
+      } else {
+        messageEl.innerHTML = "";
+      }
+
+    });
+  </script>
+```
+
+This JavaScript code does two things. First it attaches an event to the `click` event of the `saveButton`. With this code attached, then the button is clicked it will call the code that we defined to validate that the title is not empty.
+
+The code to perform the validation looks at the value of the `title` field. If it is empty it sets another element on the page (`title-required`) to have the text "This field is required" and tells the button to not execute its default behavior via the call to `event.preventDefault()`. The default behavior of the submit button is to issue the HTTP POST defined in the HTML FORM, our call to `event.preventDefault()` stops this call.
+
+When writing JavaScript on the client-side is common to make references to the HTML elements on the page, these elements are commonly known as the [Document Object Model](https://developer.mozilla.org/en-US/docs/Glossary/DOM) (DOM). The `document` referenced in the previous code is how we access the DOM in JavaScript.
+
+Although JavaScript is a programming language like Ruby or Python, the code that we write in JavaScript on the client-side tends to look different from code in these other languages because (1) JavaScript is a completely different programming language and (2) the code in JavaScript tends to run asynchronous and asynchronous programming is hard. But asynchronous programming is also what allows the code in JavaScript to run in your browser without freezing your browser while the code executes. Again the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous) has a good introduction to this topic.
+
+
+### JavaScript - using an external file
+It is possible to reference an external JavaScript file rather than embedding the JavaScript code directly on the page. For example, we can replace the `<script>...</script>` section in `./views/book_edit_with_js.erb` with the following:
+
+```
+  <script src="book_validations.js" ></script>
+```
+
+This will load the JavaScript defined in `./public/book_validations.js` which has the exact code that we had before. We can even add the same line to the `./views/book_new.erb` view to get the same validation code when adding a new book.
+
+Similarly to what we did with CSS, it is also possible to load external JavaScript files directly from the `<head>...</head>` section of the page as shown in the example below:
+
+```
+  <head>
+    <title>Hello (external JS file)</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" ></script>
+  </head>
+```
+
+however, the order in which JavaScript is loaded and executed is important and something that has to be kept in mind when loading from an external source from the `<head>...</head>` section of the page. If we load and execute the JavaScript before the HTML elements are rendered on the page the code won't be able to find them. There are many ways of working around this issue, and libraries like [jQuery](https://jquery.com/) take care of it rather nicely, just be aware of this.
+
 

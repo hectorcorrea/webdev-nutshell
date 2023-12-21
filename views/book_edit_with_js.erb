@@ -1,5 +1,5 @@
 <body>
-  <h1>Editing Book (with validation)</h1>
+  <h1>Editing Book (with JavaScript)</h1>
   <form action="/books/<%= @book['id'] %>/save" method="post" >
     <p>
       <b>Title:</b>
@@ -21,33 +21,16 @@
 
   <script>
     /*
-     * Defines a function to validate that the title is not empty
-     */
-    var validateTitle = function() {
-      const titleEl = document.getElementById("title");
-      const titleReqEl = document.getElementById("title-required");
-      if (titleEl.value.trim() === "") {
-        titleReqEl.innerHTML = "This field is required";
-        return false;
-      } else {
-        titleReqEl.innerHTML = "";
-        return true;
-      }
-    }
-
-    /*
-     * When the "title" textbox changes...
-     */
-    document.getElementById("title").addEventListener("change", (event) => {
-      validateTitle();
-    });
-
-    /*
-     * When the "saveButton" is clicked.
+     * When the "saveButton" is clicked...
      */
     document.getElementById("saveButton").addEventListener("click", (event) => {
-      if (validateTitle() == false) {
-        event.preventDefault()
+      const titleEl = document.getElementById("title");
+      const messageEl = document.getElementById("title-required");
+      if (titleEl.value.trim() === "") {
+        messageEl.innerHTML = "This field is required";
+        event.preventDefault();
+      } else {
+        messageEl.innerHTML = "";
       }
     });
   </script>
