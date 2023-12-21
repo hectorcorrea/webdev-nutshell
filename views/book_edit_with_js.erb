@@ -23,15 +23,17 @@
     /*
      * When the "saveButton" is clicked...
      */
-    document.getElementById("saveButton").addEventListener("click", (event) => {
+     document.getElementById("saveButton").addEventListener("click", (event) => {
+
       const titleEl = document.getElementById("title");
-      const messageEl = document.getElementById("title-required");
       if (titleEl.value.trim() === "") {
+        const messageEl = document.getElementById("title-required");
         messageEl.innerHTML = "This field is required";
         event.preventDefault();
       } else {
         messageEl.innerHTML = "";
       }
+
     });
   </script>
 </body>

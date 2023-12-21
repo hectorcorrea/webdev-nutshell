@@ -5,7 +5,7 @@ document.getElementById("saveButton").addEventListener("click", (event) => {
   const messageEl = document.getElementById("title-required");
   if (titleEl.value.trim() === "") {
     messageEl.innerHTML = "This field is required";
-    event.preventDefault()
+    event.preventDefault();
   } else {
     messageEl.innerHTML = "";
   }

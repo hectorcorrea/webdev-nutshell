@@ -35,6 +35,9 @@ The browser communicates with the web server via a protocol known as HTTP. When 
 > [how the Internet works](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/How_does_the_Internet_work),
 > and [getting started with the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
 > that are worth checking out.
+>
+> The book "Broad Band - The Untold Story of the Women Who Made the Internet" by Claire L. Evans is also a fascinating
+> story of the people and communities that made the Internet what it is today.
 
 We'll dive into the details of HTTP at a later point, but to get started let's look closely at HTML first.
 
@@ -618,9 +621,9 @@ The content of the `./views/book_edit_with_js.erb` view is similar to the one th
   </script>
 ```
 
-This JavaScript code does two things. First it attaches an event to the `click` event of the `saveButton`. With this code attached, then the button is clicked it will call the code that we defined to validate that the title is not empty.
+This JavaScript code does two things. First it attaches an event to the `click` event of the `saveButton`. With this code attached, when the button is clicked it will call the code that we defined to validate that the title is not empty.
 
-The code to perform the validation looks at the value of the `title` field. If it is empty it sets another element on the page (`title-required`) to have the text "This field is required" and tells the button to not execute its default behavior via the call to `event.preventDefault()`. The default behavior of the submit button is to issue the HTTP POST defined in the HTML FORM, our call to `event.preventDefault()` stops this call.
+The code to perform the validation looks at the value of the `title` field. If it is empty it sets the text "This field is required" to another element on the page (`title-required`) and tells the button to not execute its default behavior via the call to `event.preventDefault()`. The default behavior of the submit button is to issue the HTTP POST defined in the HTML FORM, the call to `event.preventDefault()` stops this call.
 
 When writing JavaScript on the client-side is common to make references to the HTML elements on the page, these elements are commonly known as the [Document Object Model](https://developer.mozilla.org/en-US/docs/Glossary/DOM) (DOM). The `document` referenced in the previous code is how we access the DOM in JavaScript.
 
