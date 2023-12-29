@@ -30,14 +30,13 @@ The browser communicates with the web server via a protocol known as HTTP. When 
      |                               |
 ```
 
-> If this is your first encounter with web development, the Mozilla Developer Network has great
-> tutorials about the [history of the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/The_web_and_web_standards),
-> [how the Internet works](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/How_does_the_Internet_work),
-> and [getting started with the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
-> that are worth checking out.
->
-> The book "Broad Band - The Untold Story of the Women Who Made the Internet" by Claire L. Evans is also a fascinating
-> story of the people and communities that made the Internet what it is today.
+If this is your first encounter with web development the following are good pieces to learn more about the history of the internet and the world wide web:
+
+* [History of the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/The_web_and_web_standards)
+* [How the Internet works](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/How_does_the_Internet_work),
+* [Getting started with the web](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web)
+* The book [Broad Band - The Untold Story of the Women Who Made the Internet](https://catalog.princeton.edu/catalog/99108000433506421) by Claire L. Evans is also a fascinating story of the people and communities that made the Internet what it is today.
+* [The birth of the Web](https://home.web.cern.ch/science/computing/birth-web) at CERN where you can view a copy of the very first web site.
 
 We'll dive into the details of HTTP at a later point, but to get started let's look closely at HTML first.
 
@@ -220,23 +219,26 @@ The talk [Everything You Know About Web Design Just Changed](https://www.youtube
 ### CSS - using an external file
 In our previous examples we inserted the CSS for our pages right on the `<head>...</head>` section of the HTML page.
 
-Another common way to insert CSS inside a page is to *reference an external file* that has the CSS that we would normally put in the `<style>...</style>` section. For example, let's look at the  `<head>...</head>` section of our `hello-world-bootstrap.html` page, notice that it looks like this:
+Another common way to insert CSS inside a page is to *reference an external file* that has the CSS that we would normally put in the `<style>...</style>` section. For example, let's replace the  `<head>...</head>` section of our `hello-world-fancy.html` page to look like this:
 
 ```
   <head>
-    <title>Hello (bootstrap)</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Hello (fancy)</title>
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.css">
   </head>
 ```
 
-The `<link>` element tells the browser to load the CSS styles from the URL indicated. This particular example is using the CSS defined by [Bootstrap](https://getbootstrap.com/) which is a popular toolkit for frontend development. The HTML content in the `hello-world-bootstrap.html` file references several CSS class defined by Bootstrap, notice the `class="container"`, `class="row"`, `class="col"` on that HTML file.
+The `<link>` element tells the browser to load the CSS styles from the URL indicated. This particular example is using the CSS defined by [new.css](https://github.com/xz/new.css) which is a very small framework for frontend development that uses "some sensible defaults and styles your HTML to look reasonable".
+
+Refresh your browser to view the `hello-world-fancy.html` page with the new defaults.
 
 
 ## Leaving file:// behind
 
-If you look at the address bar in your browser while you have the `hello_world.html` loaded you'll notice that it says something along the lines of `file:///something/.../hello-world.html`.
+If you look at the address bar in your browser while you have the `hello-world-fancy.html` loaded you'll notice that it says something along the lines of `file:///something/.../hello-world-fancy.html`.
 
-The `file://` at the beginning of the URL indicates that the browser is accessing this file via the "file protocol". However, when you visit a website, say https://wikipedia.org, you'll notice that the URL will start with `http://` (or `https://`) rather than `file://`.
+The `file://` at the beginning of the URL indicates that the browser is accessing this file via the "file protocol". However, when you visit a website, say https://wikipedia.org, you would notice that the URL starts with `http://` (or `https://`) rather than `file://`.
 
 The file protocol is fine for loading simple HTML pages from our local disk, but for web development we use the HTTP protocol which allows us to load HTML pages from remote servers. In the example above the URL `https://wikipedia.org` tells the browser to fetch the Wikipedia home page via the network (rather than fetching it from a file on our local disk.)
 
@@ -404,6 +406,19 @@ end
 
 The important thing about this application is that we could put it on a different server (rather than on our own laptop) and make it available for the world to access, say via a URL like `http://my-first-ruby-application.org`. We are not going to this now, but the fact that this application uses HTTP as its communication protocol and produces HTML means that we could.
 
+> The 3000 in the URL http://localhost:3000/ designates the port the browser will
+> use to talk to our `localhost` server. If we don't indicate a port in the URL
+> (e.g. http://wikipedia.org) the browser by default will use port 80 and will
+> issue http://wikipedia.org:80 behind the scenes.
+>
+> Our little Ruby program is hard-coded to listen on port `3000`, see line
+> `set :port, 3000` in `webdemo1.rb`.
+>
+> Port numbers below 1024 are reserved in most operating systems and
+> [require administrative privileges to be accessed](https://stackoverflow.com/questions/10182798/why-are-ports-below-1024-privileged).
+> To work around that security restriction developers typically use port
+> numbers like 3000 or 8080 during development.
+
 For now, type `CTRL-C` from your terminal to shut down this application. You'll see the following output in the terminal:
 
 ```
@@ -428,11 +443,11 @@ get("/fancy") do
 end
 ```
 
-By default the ERB file is expected to be found in the `./views` folder. In fact you can open this file in VS Code and you'll notice that is an almost identical copy to the `hello_world_fancy.html` that we used at the beginning of the workshop.
+By default the ERB file is expected to be found in the `./views` folder. In fact you can open this file in VS Code and you'll notice that is an almost identical copy to the `hello-world-fancy.html` that we used at the beginning of the workshop.
 
 We can run this new demo by running `ruby webdemo2.rb` from the Terminal window and pointing our browser again to http://localhost:3000/fancy
 
-Notice how it looks just like our previous `hello_world_fancy.html` page, but again, this time the page is served via HTTP (rather than via the file system).
+Notice how it looks just like our previous `hello-world-fancy.html` page, but again, this time the page is served via HTTP (rather than via the file system).
 
 Another thing that is not obvious in the code but that is important to notice is the page rendered at http://localhost:3000/fancy is using some CSS styling, but there is no `<style>...</style>` section defined in our `fancy.erb` file. Where is this styling coming from?
 
@@ -649,5 +664,3 @@ Similarly to what we did with CSS, it is also possible to load external JavaScri
 ```
 
 however, the order in which JavaScript is loaded and executed is important and something that has to be kept in mind when loading from an external source from the `<head>...</head>` section of the page. If we load and execute the JavaScript before the HTML elements are rendered on the page the code won't be able to find them. There are many ways of working around this issue, and libraries like [jQuery](https://jquery.com/) take care of it rather nicely, just be aware of this.
-
-
