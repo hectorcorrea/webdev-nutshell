@@ -23,7 +23,7 @@ class BookDatabase
   #
   # Finds one record by id
   def self.find(id)
-    book = all.find { |book| book['id'] == id}
+    book = all.find { |book| book['id'] == id.to_i }
   end
 
   #
@@ -35,16 +35,9 @@ class BookDatabase
 
   #
   # Adds a record to the underlying JSON file
-  def self.add(id, title, author, year)
+  def self.add(title, author, year)
     # Calculate the id for the new book...
-    new_id = 0
-    books = all
-    if books.count == 0
-      new_id = 1
-    else
-      latest_book = books.max_by { |book| book["id"] }
-      new_id = latest_book["id"] + 1
-    end
+    new_id = get_new_book_id()
 
     # ...and save the new book
     new_book = {
@@ -53,6 +46,7 @@ class BookDatabase
       "author" => author,
       "year" => year
     }
+    books = all
     books << new_book
     File.write("books.json", JSON.pretty_generate(books))
 
@@ -66,7 +60,7 @@ class BookDatabase
     books = all
     books.each do |book|
       # ...if this record has the id that was provided
-      if book["id"] == id
+      if book["id"] == id.to_i
         # ... update it
         book["title"] = title
         book["author"] = author
@@ -78,5 +72,17 @@ class BookDatabase
     end
 
     return false
+  end
+
+  #
+  # Calculates the id for a new book
+  def self.get_new_book_id
+    books = all
+    if books.count == 0
+      return 1
+    end
+
+    latest_book = books.max_by { |book| book["id"] }
+    return latest_book["id"] + 1
   end
 end

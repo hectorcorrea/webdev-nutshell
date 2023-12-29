@@ -13,34 +13,33 @@ end
 
 # Display information about a single book
 get("/books/:id") do
-  id = params[:id].to_i
-  @book = BookDatabase.find(id)
+  book_id = params["id"]
+  @book = BookDatabase.find(book_id)
   erb(:book_show)
 end
 
 # Display the edit form for a single book
 get("/books/:id/edit") do
-  id = params[:id].to_i
-  @book = BookDatabase.find(id)
+  book_id = params["id"]
+  @book = BookDatabase.find(book_id)
   erb(:book_edit)
 end
 
 # Save the information for a single book
 post("/books/:id/save") do
   # Get the values submitted on the HTML FORM...
-  id = params[:id].to_i
+  book_id = params["id"]
   title = params["title"]
   author = params["author"]
   year = params["year"].to_i
   # ...update the book in our database
-  BookDatabase.update(id, title, author, year)
+  BookDatabase.update(book_id, title, author, year)
   # ...and send the user to the show page of the book updated
-  redirect "/books/#{id}"
+  redirect "/books/#{book_id}"
 end
 
 # Display the form to add a new book
 get("/new-book") do
-  id = params[:id]
   @book = BookDatabase.create_new
   erb(:book_new)
 end
@@ -52,7 +51,7 @@ post("/new-book") do
   author = params["author"]
   year = params["year"].to_i
   # ...add the new the book to our database
-  id = BookDatabase.add(id, title, author, year)
+  new_book_id = BookDatabase.add(title, author, year)
   # ...and send the user to the show page for our new book
-  redirect "/books/#{id}"
+  redirect "/books/#{new_book_id}"
 end

@@ -501,13 +501,13 @@ Let's go ahead and look at `webdemo3_books.rb`. Notice how this example has seve
 
 ```
 get("/books/:id") do
-  id = params[:id].to_i
-  @book = BookDatabase.find(id)
+  book_id = params["id"]
+  @book = BookDatabase.find(book_id)
   erb(:book_show)
 end
 ```
 
-The `:id` on the previous route indicates that there is a "named value" that will vary. For example in the URL `/books/1` the `1` will be considered the id while on the URL `/books/759` the `759` will be considered the id. We can access the id of the URL via `params[:id]` as you can see in the code above.
+The `:id` on the previous route indicates that there is a "named value" that will vary. For example in the URL `/books/1` the `1` will be considered the id while on the URL `/books/759` the `759` will be considered the id. We can access the `:id` of the URL via `params["id"]` as you can see in the code above.
 
 Another important thing to notice in this route is that it declares an instance variable: `@book`. The value of this variable will be visible when Sinatra executes `erb(:book_show)` which means that we can reference `@book` in `book_show.erb`. If we look inside `book_show.erb` there is an HTML fragment that looks like this:
 
@@ -533,8 +533,8 @@ The way this works in our `webdemo3_books.rb` example is that when the user clic
 
 ```
 get("/books/:id/edit") do
-  id = params[:id].to_i
-  @book = BookDatabase.find(id)
+  book_id = params["id"]
+  @book = BookDatabase.find(book_id)
   erb(:book_edit)
 end
 ```
@@ -543,16 +543,15 @@ There is nothing extraordinary on this route. In fact it looks very similar to t
 
 ```
 <body>
-  <form action="/books/<%= @book['id'] %>/save" method="post" >
+  <FORM action="/books/<%= @book['id'] %>/save" method="post" >
     <p>
       <b>Title:</b>
-      <input id="title" name="title" />
+      <INPUT id="title" name="title" />
     </p>
     ...
     <p>
-      <input type="submit" value="Save" />
     </p>
-  </form>
+  </FORM>
 </body>
 ```
 
@@ -571,16 +570,16 @@ Our `webdemo3_books.rb` has a route to handle this particular HTTP POST request.
 ```
 post("/books/:id/save") do
   # Get the values submitted on the HTML FORM...
-  id = params[:id].to_i
+  book_id = params["id"]
   title = params["title"]
   author = params["author"]
   year = params["year"].to_i
 
   # ...update the book in our database
-  BookDatabase.update(id, title, author, year)
+  BookDatabase.update(book_id, title, author, year)
 
   # ...and send the user to the show page for our new book
-  redirect "/books/#{id}"
+  redirect "/books/#{book_id}"
 end
 ```
 
@@ -649,7 +648,7 @@ Although JavaScript is a programming language like Ruby or Python, the code that
 It is possible to reference an external JavaScript file rather than embedding the JavaScript code directly on the page. For example, we can replace the `<script>...</script>` section in `./views/book_edit_with_js.erb` with the following:
 
 ```
-  <script src="book_validations.js" ></script>
+  <script src="/book_validations.js" ></script>
 ```
 
 This will load the JavaScript defined in `./public/book_validations.js` which has the exact code that we had before. We can even add the same line to the `./views/book_new.erb` view to get the same validation code when adding a new book.
