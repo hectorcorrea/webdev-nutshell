@@ -33,7 +33,7 @@ Visual Studio Code is a text editor that works on Mac, Windows, and Linux. It al
 
 Once you have downloaded and installed Docker make sure you run the Docker application (aka Docker Desktop) and keep it running for the duration of the workshop.
 
-> Note: If you already Ruby installed on your machine then you don't need Docker.
+> Note: If you already have Ruby installed on your machine then you don't need Docker.
 > Any version 3.x of Ruby is OK for this workshop.
 
 
