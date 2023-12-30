@@ -64,7 +64,7 @@ Below is an example of a very basic web page with HTML:
 
 Notice how it has some sections (e.g. `html`, `head` and `body`) and some other elements (e.g. `<h1>` and `<p>`) surrounded by angle backets.
 
-Create a file on your computer with the content above and save that with the name `hello-world.html`. Now, launch your browser and open the file `hello-world.html` file that you just created.
+With your *editor* open the file `hello-world.html` that comes with the examples that you downloaded, it should look like the HTML above. Now, launch your *browser* and open the file `hello-world.html`.
 
 The `<head>` section is where we define the metadata of the page. In the previous example we set the title which is how your browser will identity the page within your browser tabs. Go ahead and change the title of your page from `Hello` to `Hola` in your `hello-world.html` file, save it, and refresh your browser. You should see the new title.
 
@@ -73,7 +73,7 @@ The `<body>` section is the actual content that will be diplayed to the user. In
 
 ### HTML elements
 
-Most of the elements inside the `<body>` section of an HTML page can be repeated, for example you can have many paragraphs (`<p>`), many headers (`<h2>`), or many divs (`<div>`).
+The elements inside the `<body>` section of an HTML page can be repeated, for example you can have many paragraphs (`<p>`), many headers (`<h2>`), or many divs (`<div>`).
 
 Some of these elements can also be nested. For example you can have a `<div>` with many paragraphs `<p>`. A paragraph can contain many spans (`<span>`), bold tags (`<b>`), or italic tags (`<i>`).
 
@@ -81,7 +81,9 @@ Most of the HTML elements on a page have an open and a close tag, for example `<
 
 The anchor tag (`<a>`) is a special element because this element allows us to create links to other web pages.
 
-Below is a fancier version of our previous page. Create a new file `hello-world-fancy.html` with the content below and open it in your browser. Notice how there is text in **bold**, *italic*, a link to another page, and an even an image.
+Feel free to make changes to `hello-world.html` and try different things. Remember to reload the page on your browser to see your changes.
+
+With your editor open the file `hello-world-fancy.html`, the content will look like the HTML below:
 
 ```
 <html>
@@ -127,9 +129,12 @@ Below is a fancier version of our previous page. Create a new file `hello-world-
 </html>
 ```
 
+Now load this file in your browser, notice how there is text in **bold**, *italic*, a link to another page, and an even an image. Can you find in the HTML above where these elements are defined?
+
 The [Mozilla web site](https://developer.mozilla.org/en-US/docs/Web/HTML) has a wealth of information to understand HTML and how to structure a web page.
 
 HTML is what defines the *content* and the *structure* of a web page, but to style a page we use an additional language: CSS.
+
 
 ## CSS
 
@@ -227,7 +232,7 @@ Another common way to insert CSS inside a page is to *reference an external file
 
 ```
   <head>
-    <title>Hello (fancy)</title>
+    <title>Hello (external CSS)</title>
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.css">
   </head>
@@ -288,16 +293,6 @@ The code for the server-side can be written any programming language: Ruby, Pyth
 Keep in mind that, regardless of the programming language that you use on the server-side, the goal is to produce a string with HTML that will be send back to the browser.
 
 
-## Required software
-
-For this workshop you'll need to have a text editor and Ruby installed on your machine. The easiest way to get this done is by installing:
-
-* Visual Studio Code (https://code.visualstudio.com/)
-* Docker (https://www.docker.com/)
-
-Visual Studio Code is a text editor that works on Mac, Windows, and Linux. It also provides connectivity to Docker which we will use to download a container with Ruby installed on it.
-
-
 ## Installing Ruby
 
 Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker to download a container with Ruby already preinstalled.
@@ -311,7 +306,11 @@ From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-
 
 At this point VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the first time you do it, it'll be a bit faster the next time you select this option. You can click on the "Starting Dev Container (show log)" link to view the progress.
 
-When it has completed the log window will display a message that says "Launched Extension Host Process."
+> If you get an error that says "Make sure the Docker daemon is running"
+> it means the Docker Desktop application is not running. Go ahead and
+> launch it and select "Reopen in Container" again.
+
+When VS Code has completed loading the container the log window will display an inconspicuous message that says "Launched Extension Host Process."
 
 Once it has finished, click on the "Terminal" menu and select "New Terminal". This will open a Terminal window at the bottom of the screen and it will show a prompt that looks like this:
 
