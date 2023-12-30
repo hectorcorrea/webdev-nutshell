@@ -8,6 +8,6 @@ books = [book1, book2]
 
 puts "Here is a list of #{books.count} books: "
 books.each do |book|
-    puts "  #{book[:title]}"
+    puts "  #{book[:title]} by #{book[:author]}"
 end
 puts "=="

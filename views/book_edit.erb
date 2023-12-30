@@ -1,17 +1,21 @@
 <body>
-  <h1>Editing Book</h1>
+  <header>
+    <h1>Editing Book</h1>
+  </header>
+  <!-- When the user clicks the "submit" button the browser will
+    issue an HTTP POST http://localhost:3000/books/123/save -->
   <form action="/books/<%= @book['id'] %>/save" method="post" >
     <p>
-      <b>Title:</b>
+      <b>Title</b><br/>
       <input id="title" name="title" value="<%= @book['title'] %>" placeholder="Enter book title" />
       <span id="title-required" class="required-field-message"></span>
     </p>
     <p>
-      <b>Author:</b>
+      <b>Author</b><br/>
       <input id="author" name="author" value="<%= @book['author'] %>" placeholder="Enter book author" />
     </p>
     <p>
-      <b>Year:</b>
+      <b>Year</b><br/>
       <input id="year" name="year" value="<%= @book['year'] %>" />
     </p>
     <p>

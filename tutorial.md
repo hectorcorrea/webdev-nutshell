@@ -284,6 +284,16 @@ The code for the server-side can be written any programming language: Ruby, Pyth
 Keep in mind that, regardless of the programming language that you use on the server-side, the goal is to produce a string with HTML that will be send back to the browser.
 
 
+## Required software
+
+For this workshop you'll need to have a text editor and Ruby installed on your machine. The easiest way to get this done is by installing:
+
+* Visual Studio Code (https://code.visualstudio.com/)
+* Docker (https://www.docker.com/)
+
+Visual Studio Code is a text editor that works on Mac, Windows, and Linux. It also provides connectivity to Docker which we will use to download a container with Ruby installed on it.
+
+
 ## Installing Ruby
 
 Since we are going to use Ruby for our server-side code let's start by installing Ruby. We are going to use a Docker to download a container with Ruby already preinstalled.
@@ -293,11 +303,13 @@ Since we are going to use Ruby for our server-side code let's start by installin
 > options within Visual Studio Code, and hope everything installs correctly.
 > But once we get this going it will be fun again.
 
-From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container" then "From Dockerfile", and then click "OK" (no need to select any features).
+From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container".
 
-At this point VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the first time you do it, it'll be a bit faster after that. You can click on the "Starting Dev Container (show log)" link to view the progress.
+At this point VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the first time you do it, it'll be a bit faster the next time you select this option. You can click on the "Starting Dev Container (show log)" link to view the progress.
 
-Once it finishes click on the "Terminal" menu and select "New Terminal". This will open a Terminal window at the bottom of the screen and it will show a prompt that looks like this:
+When it has completed the log window will display a message that says "Launched Extension Host Process."
+
+Once it has finished, click on the "Terminal" menu and select "New Terminal". This will open a Terminal window at the bottom of the screen and it will show a prompt that looks like this:
 
 ```
 root@1a2b3c4d:/workspaces/webdev-nutshell#
@@ -529,27 +541,27 @@ When a browser wants to push information to a web server, for example when we hi
 
 In order for us to tell the browser what information must be passed in the HTTP POST request we use an HTML FORM element.
 
-The way this works in our `webdemo3_books.rb` example is that when the user clicks the "Edit Book" button the browser issues an HTTP GET to render an HTML FORM that allows the user to enter the new values for the book, the code for this route is below:
+The way this works in our `webdemo3_books.rb` example is that when the user clicks the "New Book" button the browser issues an HTTP GET to render an HTML FORM that allows the user to enter the new values for a new book, the code for this route is below:
 
 ```
-get("/books/:id/edit") do
-  book_id = params["id"]
-  @book = BookDatabase.find(book_id)
-  erb(:book_edit)
+get("/new-book") do
+  @book = BookDatabase.create_new
+  erb(:book_new)
 end
 ```
 
-There is nothing extraordinary on this route. In fact it looks very similar to the other routes thats we have reviewd. What is new in this code is the HTML that it renders in the `book_edit.erb` view. Below is a section of that HTML:
+There is nothing extraordinary on this route. In fact it looks very similar to the other routes thats we have reviewed. What is new in this code is the HTML that it renders in the `book_new.erb` view. Below is a section of that HTML:
 
 ```
 <body>
-  <FORM action="/books/<%= @book['id'] %>/save" method="post" >
+  <form action="/new-book" method="post" >
     <p>
-      <b>Title:</b>
-      <INPUT id="title" name="title" />
+      <b>Title</b>
+      <input id="title" name="title" placeholder="Enter book title" />
     </p>
     ...
     <p>
+      <input id="saveButton" name="saveButton" type="submit" value="Save" />
     </p>
   </FORM>
 </body>
@@ -559,7 +571,7 @@ This view introduces two new HTML elements: `<FORM>` and `<INPUT>`.
 
 HTML FORMs are a way to group the values that we want to pass to the server. These values are captured via `<INPUT>` elements. There are many kind of `<INPUT>` but in this workshop we will only show "text boxes" `<input ... />` and "submit buttons" `<input type="submit" ... />`.
 
-The HTML FORM element itself has two *attributes*: `action` and `method`. In our example we indicate that we want to use an `HTTP POST` as the method to pass the information to the server and the URL where we will POST these values is `/books/:id/save`. In other words, when the user hits "Save" the browser will issue an `HTTP POST /book/123/save`.
+The HTML FORM element itself has two *attributes*: `action` and `method`. In our example we indicate that we want to use an `HTTP POST` as the method to pass the information to the server and the URL where we will POST these values is `/new-book`. In other words, when the user hits "Save" the browser will issue an `HTTP POST /new-book`.
 
 > Note: When the browser issues the HTTP POST request it passes the values
 > from the `<INPUT>` elements as part of the request that the webserver will
@@ -568,26 +580,23 @@ The HTML FORM element itself has two *attributes*: `action` and `method`. In our
 Our `webdemo3_books.rb` has a route to handle this particular HTTP POST request. The code is below:
 
 ```
-post("/books/:id/save") do
+post("/new-book") do
   # Get the values submitted on the HTML FORM...
-  book_id = params["id"]
   title = params["title"]
   author = params["author"]
   year = params["year"].to_i
-
-  # ...update the book in our database
-  BookDatabase.update(book_id, title, author, year)
-
+  # ...add the new the book to our database
+  new_book_id = BookDatabase.add(title, author, year)
   # ...and send the user to the show page for our new book
-  redirect "/books/#{book_id}"
+  redirect "/books/#{new_book_id}"
 end
 ```
 
 This method does three things:
 
-1. It gathers the values that the browser pushed to the server from the `params` variable.
-2. Then it calls the `BookDatabase.update()` method to update the record in our database.
-3. And at the end it sends the user back to the "details page" for the particular book that they edited (i.e. in HTTP lingo, it redirects them).
+1. It gathers the values that the browser pushed to the server, these values are in the `params` variable.
+2. Then it calls the `BookDatabase.add()` method to add a new the record to our database.
+3. And at the end it sends the user to the "details page" for the particular book that they just added (in HTTP lingo, it redirects them).
 
 
 ## JavaScript (on the client-side)
