@@ -9,6 +9,32 @@
 # but it is good enough the purposes of this workshop.
 #
 class BookDatabase
+
+  # This class represents a single book
+  class Book
+    attr_accessor :id, :title, :author, :year
+    def initialize(id: 0, title: "", author: "", year: Time.now.year)
+      @id = id
+      @title = title
+      @author = author
+      @year = year
+    end
+
+    def self.new_from_hash(hash)
+      Book.new(id: hash["id"], title: hash["title"], author: hash["author"], year: hash["year"])
+    end
+
+    # see: https://stackoverflow.com/a/40642530/446681
+    def as_json(options={})
+      { id: @id, title: @title, author: @author, year: @year }
+    end
+
+    # see: https://stackoverflow.com/a/40642530/446681
+    def to_json(*options)
+      as_json(*options).to_json(*options)
+    end
+  end
+
   #
   # Returns all the records in the underlying JSON file
   def self.all
@@ -16,21 +42,21 @@ class BookDatabase
     if File.exists?("books.json")
       text = File.read("books.json")
     end
-    books = JSON.parse(text)
+    data = JSON.parse(text)
+    books = data.map { |hash| Book.new_from_hash(hash) }
     books
   end
 
   #
   # Finds one record by id
   def self.find(id)
-    book = all.find { |book| book['id'] == id.to_i }
+    book = all.find { |book| book.id == id.to_i }
   end
 
   #
   # Returns a new empty book (but it does not save it)
   def self.create_new
-    book = { "title" => "", "author" => "", "year" => Time.now.year }
-    book
+    Book.new
   end
 
   #
@@ -40,12 +66,7 @@ class BookDatabase
     new_id = get_new_book_id()
 
     # ...and save the new book
-    new_book = {
-      "id" => new_id,
-      "title" => title,
-      "author" => author,
-      "year" => year
-    }
+    new_book = Book.new(id: new_id, title: title, author: author, year: year)
     books = all
     books << new_book
     File.write("books.json", JSON.pretty_generate(books))
@@ -60,11 +81,11 @@ class BookDatabase
     books = all
     books.each do |book|
       # ...if this record has the id that was provided
-      if book["id"] == id.to_i
+      if book.id == id.to_i
         # ... update it
-        book["title"] = title
-        book["author"] = author
-        book["year"] = year
+        book.title = title
+        book.author = author
+        book.year = year
         # ... write the changes to disk
         File.write("books.json", JSON.pretty_generate(books))
         return true
@@ -82,7 +103,7 @@ class BookDatabase
       return 1
     end
 
-    latest_book = books.max_by { |book| book["id"] }
-    return latest_book["id"] + 1
+    latest_book = books.max_by { |book| book.id }
+    return latest_book.id + 1
   end
 end

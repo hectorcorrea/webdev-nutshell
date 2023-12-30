@@ -3,23 +3,23 @@
     <h1>Book Details</h1>
   </header>
   <p>
-    <a href="/books/<%= @book['id'] %>/edit"><button>Edit Book</button></a>
+    <a href="/books/<%= @book.id %>/edit"><button>Edit Book</button></a>
     <a href="/"><button>Home Page</button></a>
   </p>
   <p>
     <b>Title:</b>
-    <%= @book['title'] %>
+    <%= @book.title %>
   </p>
   <p>
     <b>Id:</b>
-    <%= @book['id'] %>
+    <%= @book.id %>
   </p>
   <p>
     <b>Author:</b>
-    <%= @book['author'] %>
+    <%= @book.author %>
   </p>
   <p>
     <b>Year:</b>
-    <%= @book['year'] %>
+    <%= @book.year %>
   </p>
 </body>

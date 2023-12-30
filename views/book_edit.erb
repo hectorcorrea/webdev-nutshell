@@ -4,22 +4,22 @@
   </header>
   <!-- When the user clicks the "submit" button the browser will
     issue an HTTP POST http://localhost:3000/books/123/save -->
-  <form action="/books/<%= @book['id'] %>/save" method="post" >
+  <form action="/books/<%= @book.id %>/save" method="post" >
     <p>
       <b>Title</b><br/>
-      <input id="title" name="title" value="<%= @book['title'] %>" placeholder="Enter book title" />
+      <input type="text" id="title" name="title" value="<%= @book.title %>" placeholder="Enter book title" />
       <span id="title-required" class="required-field-message"></span>
     </p>
     <p>
       <b>Author</b><br/>
-      <input id="author" name="author" value="<%= @book['author'] %>" placeholder="Enter book author" />
+      <input type="text" id="author" name="author" value="<%= @book.author %>" placeholder="Enter book author" />
     </p>
     <p>
       <b>Year</b><br/>
-      <input id="year" name="year" value="<%= @book['year'] %>" />
+      <input type="text" id="year" name="year" value="<%= @book.year %>" />
     </p>
     <p>
-      <input id="saveButton" name="saveButton" type="submit" value="Save" />
+      <input type="submit" id="saveButton" name="saveButton" value="Save" />
     </p>
   </form>
 </body>

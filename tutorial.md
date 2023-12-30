@@ -485,7 +485,11 @@ For example, let's add the following line to the `./views/fancy.erb` file. You c
 <p>Today is: <%= DateTime.now.to_date %></p>
 ```
 
-This line will add an HTML paragraph `<p>...</p>` and inside of it will insert *the result of the Ruby expression* `DateTime.now.to_date` that is inside the `<%= ... %>`.
+This line will render an HTML paragraph `<p>...</p>` and inside of it will insert *the result of the Ruby expression* `DateTime.now.to_date` that is inside the `<%= ... %>`. The actual value that will be rendered will look like this:
+
+```
+<p>Today is: 2023-12-30</p>
+```
 
 Try it, refresh your browser and the http://localhost:3000/fancy page should show you today's date.
 
@@ -530,22 +534,22 @@ Another important thing to notice in this route is that it declares an instance 
 ```
   <p>
     <b>Title:</b>
-    <%= @book['title'] %>
+    <%= @book.title %>
   </p>
 ```
 
-Notice the line `<%= @book['title'] %>`. Remember that anything between the `<%= ... %>` is Ruby code that will be executed. In this case `@book['title']` is the title of the book in the `@book` variable that we declared in our router.
+Notice the line `<%= @book.title %>`. Remember that anything between the `<%= ... %>` is Ruby code that will be executed. In this case `@book.title` is the title of the book in the `@book` variable that we declared in our router.
 
 So far we have only seen `get()` routes in Sinatra. In the next section we'll talk about `post()` routes.
 
 
 ## HTTP POST and HTML FORMs
 
-When a browser wants to push information to a web server, for example when we hit "Save" after updating the information of a book, it issues an HTTP POST request to pass the information.
+When a browser wants to push information to a web server, for example when we hit "Save" after entering the information of a book, it issues an HTTP POST request to pass the information.
 
-In order for us to tell the browser what information must be passed in the HTTP POST request we use an HTML FORM element.
+In order for us to tell the browser what information must be passed in the HTTP POST request we use HTML FORM and HTML INPUT elements.
 
-The way this works in our `webdemo3_books.rb` example is that when the user clicks the "New Book" button the browser issues an HTTP GET to render an HTML FORM that allows the user to enter the new values for a new book, the code for this route is below:
+The way this works in our `webdemo3_books.rb` example is that when the user clicks the "New Book" button the browser issues an HTTP GET to render an HTML FORM that allows the user to enter the values for a new book, the code for this route is below:
 
 ```
 get("/new-book") do
@@ -554,32 +558,40 @@ get("/new-book") do
 end
 ```
 
-There is nothing extraordinary on this route. In fact it looks very similar to the other routes thats we have reviewed. What is new in this code is the HTML that it renders in the `book_new.erb` view. Below is a section of that HTML:
+There is nothing extraordinary on this route. In fact it looks very similar to the other routes thats we have reviewed. What is new in this code is the HTML that it renders inside the `book_new.erb` view. Below is a section of that HTML:
 
 ```
 <body>
   <form action="/new-book" method="post" >
     <p>
       <b>Title</b>
-      <input id="title" name="title" placeholder="Enter book title" />
+      <input type="text" id="title" name="title" />
     </p>
     ...
     <p>
-      <input id="saveButton" name="saveButton" type="submit" value="Save" />
+      <input type="submit" id="saveButton" name="saveButton" value="Save" />
     </p>
   </FORM>
 </body>
 ```
 
-This view introduces two new HTML elements: `<FORM>` and `<INPUT>`.
+This view introduces two new HTML elements: `<form>` and `<input>`.
 
-HTML FORMs are a way to group the values that we want to pass to the server. These values are captured via `<INPUT>` elements. There are many kind of `<INPUT>` but in this workshop we will only show "text boxes" `<input ... />` and "submit buttons" `<input type="submit" ... />`.
+HTML FORMs are a way to group the values that we want to pass to the server. These values are captured via `<input>` elements inside the `<form>`. The HTML FORM element itself has two *attributes* that are important:
 
-The HTML FORM element itself has two *attributes*: `action` and `method`. In our example we indicate that we want to use an `HTTP POST` as the method to pass the information to the server and the URL where we will POST these values is `/new-book`. In other words, when the user hits "Save" the browser will issue an `HTTP POST /new-book`.
+* The `action` tells the browser the URL on the server *where* the information will be send to when the user clicks the "submit" button on their browser. In our example we are telling the browser to use the `/new-book` URL.
 
-> Note: When the browser issues the HTTP POST request it passes the values
-> from the `<INPUT>` elements as part of the request that the webserver will
-> receive. This is known as the payload of the request.
+* The `method` tells the browser *how* to submit the information. In our case we are using the POST method which means that the browser will issue an `HTTP POST /new-book` when the user clicks the "submit" button.
+
+The values that the browser will push to the server are captured via the `<input>` elements inside our HTML FORM. There are many kind of `<input>` elements but in this workshop we will only use two of them: text boxes and submit buttons.
+
+Text boxes are used to allow the user to enter information in a form and they are defined as `<input type="text" ... />`, notice the type is "text".
+
+Submit buttons are used to give the user a button to indicate they are ready to send the information to the server and they are defined as follow: `<input type="submit" ... />`, notice that the type is "submit".
+
+The `id` and `name` attributes in `<input>` elements are important since this is the way the *server* will recognize each of the data elements that it receives.
+
+All of the above means that when the users clicks the "submit button" in our form the browser will issue an `HTTP POST /new-book` request and it will pass to the server the values in the `<input>` elements, in our case *title*, *author*, and *year*.
 
 Our `webdemo3_books.rb` has a route to handle this particular HTTP POST request. The code is below:
 
@@ -589,8 +601,10 @@ post("/new-book") do
   title = params["title"]
   author = params["author"]
   year = params["year"].to_i
+
   # ...add the new the book to our database
   new_book_id = BookDatabase.add(title, author, year)
+
   # ...and send the user to the show page for our new book
   redirect "/books/#{new_book_id}"
 end
