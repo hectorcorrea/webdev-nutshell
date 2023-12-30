@@ -55,5 +55,7 @@ git clone https://github.com/hectorcorrea/webdev-nutshell.git
 ## Getting started
 Once you have downloaded the code examples launch Visual Studio Code and open the folder with the code examples: `webdev-nutshell` if you used Git or `webdev-nutshell-main` otherwise.
 
-And now read and follow the steps in
+And now you ready to follow the steps in
 [tutorial.md](https://github.com/hectorcorrea/webdev-nutshell/blob/main/tutorial.md)
+
+Happy coding your first web application!
