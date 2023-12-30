@@ -558,7 +558,7 @@ get("/new-book") do
 end
 ```
 
-There is nothing extraordinary on this route. In fact it looks very similar to the other routes thats we have reviewed. What is new in this code is the HTML that it renders inside the `book_new.erb` view. Below is a section of that HTML:
+There is nothing extraordinary on this route. In fact it looks very similar to the other routes that we have reviewed. What is new in this code is the HTML that it renders inside the `book_new.erb` view. Below is a section of that HTML:
 
 ```
 <body>
