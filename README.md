@@ -10,7 +10,8 @@ The slides for the workshop be found [here](https://docs.google.com/presentation
 
 * [tutorial.md](https://github.com/hectorcorrea/webdev-nutshell/blob/main/tutorial.md) has most of the material that we will cover during the workshop.
 
-* **slides.pdf** is a copy of the slides.
+* **tutorial.pdf** is a copy of tutorial.md but in PDF format.
+* **slides.pdf** is a copy of the slides but in PDF format.
 
 * **hello.rb** and **hello_again.rb** are tiny Ruby programs, nothing to do with the web.
 * **webdemo1.rb** is a tiny web site in Ruby using Sinatra.
