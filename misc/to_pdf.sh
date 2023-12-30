@@ -8,8 +8,11 @@ pandoc tutorial.md \
 -f markdown \
 -t html -s -o tutorial.html \
 -c misc/pandoc_styles.css \
---toc -V toc-title:"Table of Contents" \
+--toc \
+--include-before-body=misc/cover_page.html \
 --metadata pagetitle="Web development in a nutshell workshop"
+
+# --toc -V toc-title:"Table of Contents" \
 
 # Convert the HTML file to PDF
 # https://wkhtmltopdf.org/usage/wkhtmltopdf.txt

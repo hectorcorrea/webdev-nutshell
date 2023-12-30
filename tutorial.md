@@ -1,6 +1,6 @@
-# Web Development in a Nutshell
+<div style="page-break-after: always;"></div>
 
-## What is a web application?
+# What is a web application?
 Broadly [speaking](https://aws.amazon.com/what-is/web-application/) a "web application is software that runs in your web browser".
 
 Browsers *run* these applications by making requests to a server, processing the responses from the server, and rendering them on your machine.
@@ -38,7 +38,10 @@ If this is your first encounter with web development the following are good piec
 * The book [Broad Band - The Untold Story of the Women Who Made the Internet](https://catalog.princeton.edu/catalog/99108000433506421) by Claire L. Evans is also a fascinating story of the people and communities that made the Internet what it is today.
 * [The birth of the Web](https://home.web.cern.ch/science/computing/birth-web) at CERN where you can view a copy of the very first web site.
 
-We'll dive into the details of HTTP at a later point, but to get started let's look closely at HTML first.
+
+# Client-side
+
+We'll start this workshop by looking at the client-side, and in particular we'll focus on HTML and CSS.
 
 
 ## HTML
@@ -66,6 +69,7 @@ Create a file on your computer with the content above and save that with the nam
 The `<head>` section is where we define the metadata of the page. In the previous example we set the title which is how your browser will identity the page within your browser tabs. Go ahead and change the title of your page from `Hello` to `Hola` in your `hello-world.html` file, save it, and refresh your browser. You should see the new title.
 
 The `<body>` section is the actual content that will be diplayed to the user. Inside the `<body>` section we can add many different kind of HTML elements: paragraphs, divs, tables, images, forms, input boxes, links, buttons, and many more.
+
 
 ### HTML elements
 
@@ -273,7 +277,7 @@ To learn more about HTTP check out the [tutorials on the Mozilla website](https:
 > For the purposes of this workshop they are interchangeable.
 
 
-## Server-side
+# Server-side
 
 So far all our examples have shown the client-side of a web application. In the next section we are going to dive into the server-side of the application.
 
@@ -599,7 +603,7 @@ This method does three things:
 3. And at the end it sends the user to the "details page" for the particular book that they just added (in HTTP lingo, it redirects them).
 
 
-## JavaScript (on the client-side)
+# JavaScript (on the client-side)
 Another common technology that is used in most web pages is JavaScript (JS). JavaScript is a programming language that we can embed in our HMTL files to add dynamic functionality to the page.
 
 For example, we might want to validate that the value in a particular textbox is not empty on a page or that it matches a specific type of format (e.g. say a phone number). This kind of dynamic behavior on the page can be implemented with JavaScript.
@@ -653,7 +657,7 @@ When writing JavaScript on the client-side is common to make references to the H
 Although JavaScript is a programming language like Ruby or Python, the code that we write in JavaScript on the client-side tends to look different from code in these other languages because (1) JavaScript is a completely different programming language and (2) the code in JavaScript tends to run asynchronous and asynchronous programming is hard. But asynchronous programming is also what allows the code in JavaScript to run in your browser without freezing your browser while the code executes. Again the [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous) has a good introduction to this topic.
 
 
-### JavaScript - using an external file
+## JavaScript - using an external file
 It is possible to reference an external JavaScript file rather than embedding the JavaScript code directly on the page. For example, we can replace the `<script>...</script>` section in `./views/book_edit_with_js.erb` with the following:
 
 ```

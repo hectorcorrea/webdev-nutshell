@@ -47,11 +47,17 @@
     p {
       margin: 1em 0;
     }
+    /* hector was here */
     a {
       color: #1a1a1a;
+      text-decoration-style: dashed;
+      text-decoration-line: underline;
     }
+    /* hector was here */
     a:visited {
       color: #1a1a1a;
+      text-decoration-style: dashed;
+      text-decoration-line: underline;
     }
     img {
       max-width: 100%;
@@ -155,9 +161,10 @@
     #TOC > ul {
       padding-left: 0;
     }
+    /* hector was here
     #TOC a:not(:hover) {
       text-decoration: none;
-    }
+    } */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
