@@ -310,9 +310,9 @@ At this point VS Code will re-launch and it will create the Docker container wit
 > it means the Docker Desktop application is not running. Go ahead and
 > launch it and select "Reopen in Container" again.
 
-When VS Code has completed loading the container the log window will display an inconspicuous message that says "Launched Extension Host Process."
+When VS Code has completed loading the container the log window will display an inconspicuous message that says "Launched Extension Host Process" and the bottom left corner of VS Code (the blue label) will say "Dev Container: Existing Dockerfile @ desktop-linux".
 
-Once it has finished, click on the "Terminal" menu and select "New Terminal". This will open a Terminal window at the bottom of the screen and it will show a prompt that looks like this:
+Once the container has finished loading, click on the "Terminal" menu and select "New Terminal". This will open a Terminal window at the bottom of the screen and it will show a prompt that looks like this:
 
 ```
 root@1a2b3c4d:/workspaces/webdev-nutshell#

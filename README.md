@@ -1,27 +1,8 @@
 # Web development in a nutshell
 This repository contains the materials for the Web Development in a Nutshell workshop to be presented at [Wintersession 2024](https://winter.princeton.edu/).
 
-The slides for the workshop be found [here](https://docs.google.com/presentation/d/1dFwsNCUd7iTUzFKF7Po1DZ5KLFQ0t7qprB5VrCiABaM/edit#slide=id.g25432a504aa_0_0)
 
-
-## Files in this repository
-
-Workshop tutorial:
-* [tutorial.md](https://github.com/hectorcorrea/webdev-nutshell/blob/main/tutorial.md) has most of the material that we will cover during the workshop.
-* **tutorial.pdf** is a copy of tutorial.md but in PDF format.
-* **slides.pdf** is a copy of the slides but in PDF format.
-
-HTML and CSS examples:
-* **hello-world.html** and **hello-world-fancy.html** are two small HTML samples.
-* **css-column-layout.html** shows how to use CSS multiple column layout.
-* **css-grid-layout.html** shows how to CSS grid layout.
-
-Ruby examples:
-* **hello.rb** and **hello_again.rb** are sample Ruby programs, nothing to do with the web.
-* **webdemo1.rb** is a tiny web site in Ruby using Sinatra.
-* **webdemo2.rb** a variation of `webdemo1.rb` that shows how to use views (i.e. ERB files).
-* **webdemo3_books.rb** a more complete web site that allows the user to edit the data.
-
+Most of the material for the workshop is available on [tutorial.md](https://github.com/hectorcorrea/webdev-nutshell/blob/main/tutorial.md) and the slides are available [here](https://docs.google.com/presentation/d/1dFwsNCUd7iTUzFKF7Po1DZ5KLFQ0t7qprB5VrCiABaM/edit#slide=id.g25432a504aa_0_0).
 
 ## Required software
 For this workshop you'll need to have a text editor and Ruby installed on your machine. The easiest way to get this done is by downloading and installing:
@@ -59,3 +40,24 @@ And now you ready to follow the steps in
 [tutorial.md](https://github.com/hectorcorrea/webdev-nutshell/blob/main/tutorial.md)
 
 Happy coding your first web application!
+
+
+## Files in this repository
+
+A brief description of the files in this repository.
+
+Workshop tutorial:
+* [tutorial.md](https://github.com/hectorcorrea/webdev-nutshell/blob/main/tutorial.md) has most of the material that we will cover during the workshop.
+* **tutorial.pdf** is a copy of tutorial.md but in PDF format.
+* **slides.pdf** is a copy of the slides but in PDF format.
+
+HTML and CSS examples:
+* **hello-world.html** and **hello-world-fancy.html** are two small HTML samples.
+* **css-column-layout.html** shows how to use CSS multiple column layout.
+* **css-grid-layout.html** shows how to CSS grid layout.
+
+Ruby examples:
+* **hello.rb** and **hello_again.rb** are sample Ruby programs, nothing to do with the web.
+* **webdemo1.rb** is a tiny web site in Ruby using Sinatra.
+* **webdemo2.rb** a variation of `webdemo1.rb` that shows how to use views (i.e. ERB files).
+* **webdemo3_books.rb** a more complete web site that allows the user to edit the data.
