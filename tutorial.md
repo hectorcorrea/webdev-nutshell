@@ -302,15 +302,15 @@ Since we are going to use Ruby for our server-side code let's start by installin
 > options within Visual Studio Code, and hope everything installs correctly.
 > But once we get this going it will be fun again.
 
-From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container".
+From within Visual Studio Code (VS Code) press `Option-Command-O` (Mac) or `Alt-Command-O` (Windows) to open the Remote Window menu. From this menu pick the option "Reopen in Container". If the option to "Reopen in Container" is not shown you will need to install the "Dev Containers" extension first by going to the "View" menu and selecting "Extensions".
 
-At this point VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the first time you do it, it'll be a bit faster the next time you select this option. You can click on the "Starting Dev Container (show log)" link to view the progress.
+Once you select "Reopen in Container" VS Code will re-launch and it will create the Docker container with Ruby. This will take a minute or two the first time you do it, it'll be a bit faster the next time you select this option. You can click on the "Starting Dev Container (show log)" link to view the progress.
 
 > If you get an error that says "Make sure the Docker daemon is running"
 > it means the Docker Desktop application is not running. Go ahead and
 > launch it and select "Reopen in Container" again.
 
-When VS Code has completed loading the container the log window will display an inconspicuous message that says "Launched Extension Host Process" and the bottom left corner of VS Code (the blue label) will say "Dev Container: Existing Dockerfile @ desktop-linux".
+When VS Code has completed loading the container the log window will display an inconspicuous message that says "Launched Extension Host Process" and the bottom left corner of VS Code (the blue/purple label) will say "Dev Container: Existing Dockerfile @ desktop-linux".
 
 Once the container has finished loading, click on the "Terminal" menu and select "New Terminal". This will open a Terminal window at the bottom of the screen and it will show a prompt that looks like this:
 
@@ -335,7 +335,7 @@ puts "Hello world from a Ruby program"
 
 Then look at the code of `hello_again.rb`, what do you think this one does? Run it via `ruby hello_again.rb` to find out.
 
-If you are new to Ruby the [Ruby in Twenty Minutes](https://www.ruby-lang.org/en/documentation/quickstart/) guide might be a good place for you to start and learn a little it about the language.
+If you are new to Ruby the [Ruby user's guide](https://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/index.html) might be a good place for you to start and learn a little it about the language.
 
 
 ## Server-side code with Ruby
@@ -350,9 +350,11 @@ To install **Sinatra** run the following command from your VS Code Terminal wind
 
 ```
 gem install sinatra
+```
 
-  > You'll see the following output
-  >
+You'll see the following output
+
+```
   > Fetching ...
   > Fetching sinatra-3.1.0.gem
   > Fetching rack-2.2.8.gem
@@ -365,9 +367,11 @@ To install **WEBrick** run the following command on your Terminal window:
 
 ```
 gem install webrick
+```
 
-  > You'll see the following output
-  >
+You'll see the following output
+
+```
   > Fetching webrick-1.8.1.gem
   > Successfully installed webrick-1.8.1
   > 1 gem installed
@@ -377,23 +381,26 @@ To install **Byebug** run the following command on your Terminal window:
 
 ```
 gem install byebug
+```
 
-  > You'll see the following output
-  >
+You'll see the following output
+
+```
   > Fetching byebug-11.1.3.gem
   > Building native extensions. This could take a while...
   > Successfully installed byebug-11.1.3
   > 1 gem installed
-
 ```
 
 Now that we have these `gems` installed we can run our first web application in Ruby:
 
 ```
 ruby webdemo1.rb
+```
 
-  > You'll see the following output
-  >
+You'll see the following output
+
+```
   > [2023-12-15 01:30:52] INFO  WEBrick 1.8.1
   > [2023-12-15 01:30:52] INFO  ruby 3.0.6 (2023-03-30) [x86_64-linux]
   > == Sinatra (v3.1.0) has taken the stage on 3000 for development with backup from WEBrick
