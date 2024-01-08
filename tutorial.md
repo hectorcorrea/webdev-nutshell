@@ -568,7 +568,7 @@ There is nothing extraordinary on this route. In fact it looks very similar to t
 
 ```
 <body>
-  <form action="/new-book" method="post" >
+  <form action="/new-book-save" method="post" >
     <p>
       <b>Title</b>
       <input type="text" id="title" name="title" />
@@ -585,9 +585,9 @@ This view introduces two new HTML elements: `<form>` and `<input>`.
 
 HTML FORMs are a way to group the values that we want to pass to the server. These values are captured via `<input>` elements inside the `<form>`. The HTML FORM element itself has two *attributes* that are important:
 
-* The `action` tells the browser the URL on the server *where* the information will be send to when the user clicks the "submit" button on their browser. In our example we are telling the browser to use the `/new-book` URL.
+* The `action` tells the browser the URL on the server *where* the information will be send to when the user clicks the "submit" button on their browser. In our example we are telling the browser to use the `/new-book-save` URL.
 
-* The `method` tells the browser *how* to submit the information. In our case we are using the POST method which means that the browser will issue an `HTTP POST /new-book` when the user clicks the "submit" button.
+* The `method` tells the browser *how* to submit the information. In our case we are using the POST method which means that the browser will issue an `HTTP POST /new-book-save` when the user clicks the "submit" button.
 
 The values that the browser will push to the server are captured via the `<input>` elements inside our HTML FORM. There are many kind of `<input>` elements but in this workshop we will only use two of them: text boxes and submit buttons.
 
@@ -597,12 +597,12 @@ Submit buttons are used to give the user a button to indicate they are ready to 
 
 The `id` and `name` attributes in `<input>` elements are important since this is the way the *server* will recognize each of the data elements that it receives.
 
-All of the above means that when the users clicks the "submit button" in our form the browser will issue an `HTTP POST /new-book` request and it will pass to the server the values in the `<input>` elements, in our case *title*, *author*, and *year*.
+All of the above means that when the users clicks the "submit button" in our form the browser will issue an `HTTP POST /new-book-save` request and it will pass to the server the values in the `<input>` elements, in our case *title*, *author*, and *year*.
 
 Our `webdemo3_books.rb` has a route to handle this particular HTTP POST request. The code is below:
 
 ```
-post("/new-book") do
+post("/new-book-save") do
   # Get the values submitted on the HTML FORM...
   title = params["title"]
   author = params["author"]

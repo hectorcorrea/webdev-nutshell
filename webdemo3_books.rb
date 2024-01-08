@@ -45,7 +45,7 @@ get("/new-book") do
 end
 
 # Save the information of a new book
-post("/new-book") do
+post("/new-book-save") do
   # Get the values submitted on the HTML FORM...
   title = params["title"]
   author = params["author"]
