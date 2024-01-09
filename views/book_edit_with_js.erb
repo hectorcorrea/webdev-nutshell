@@ -1,41 +1,39 @@
-<body>
-  <header>
-    <h1>Editing Book (with JavaScript)</h1>
-  </header>
-  <form action="/books/<%= @book.id %>/save" method="post" >
-    <p>
-      <b>Title</b><br/>
-      <input type="text" id="title" name="title" value="<%= @book.title %>" placeholder="Enter book title" />
-      <span id="title-required" class="required-field-message"></span>
-    </p>
-    <p>
-      <b>Author</b><br/>
-      <input type="text" id="author" name="author" value="<%= @book.author %>" placeholder="Enter book author" />
-    </p>
-    <p>
-      <b>Year</b><br/>
-      <input type="text" id="year" name="year" value="<%= @book.year %>" />
-    </p>
-    <p>
-      <input type="submit" id="saveButton" name="saveButton" value="Save" />
-    </p>
-  </form>
+<header>
+  <h1>Editing Book (with JavaScript)</h1>
+</header>
+<form action="/books/<%= @book.id %>/save" method="post" >
+  <p>
+    <b>Title</b><br/>
+    <input type="text" id="title" name="title" value="<%= @book.title %>" placeholder="Enter book title" />
+    <span id="title-required" class="required-field-message"></span>
+  </p>
+  <p>
+    <b>Author</b><br/>
+    <input type="text" id="author" name="author" value="<%= @book.author %>" placeholder="Enter book author" />
+  </p>
+  <p>
+    <b>Year</b><br/>
+    <input type="text" id="year" name="year" value="<%= @book.year %>" />
+  </p>
+  <p>
+    <input type="submit" id="saveButton" name="saveButton" value="Save" />
+  </p>
+</form>
 
-  <script>
-    /*
-     * When the "saveButton" is clicked...
-     */
-     document.getElementById("saveButton").addEventListener("click", (event) => {
+<script>
+  /*
+   * When the "saveButton" is clicked...
+   */
+  document.getElementById("saveButton").addEventListener("click", (event) => {
 
-      const titleEl = document.getElementById("title");
-      if (titleEl.value.trim() === "") {
-        const messageEl = document.getElementById("title-required");
-        messageEl.innerHTML = "This field is required";
-        event.preventDefault();
-      } else {
-        messageEl.innerHTML = "";
-      }
+    const titleEl = document.getElementById("title");
+    if (titleEl.value.trim() === "") {
+      const messageEl = document.getElementById("title-required");
+      messageEl.innerHTML = "This field is required";
+      event.preventDefault();
+    } else {
+      messageEl.innerHTML = "";
+    }
 
-    });
-  </script>
-</body>
+  });
+</script>

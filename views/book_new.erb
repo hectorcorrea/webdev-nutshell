@@ -1,30 +1,28 @@
-<body>
-  <header>
-    <h1>New Book</h1>
-  </header>
-  <!--
-    When the user clicks the "submit" button on this HTML FORM
-    the browser will issue an HTTP POST http://localhost:3000/new-book
+<header>
+  <h1>New Book</h1>
+</header>
+<!--
+  When the user clicks the "submit" button on this HTML FORM
+  the browser will issue an HTTP POST http://localhost:3000/new-book
 
-    The value of the HTML INPUT elements will be send to the server
-    as part of the HTTP POST
-  -->
-  <form action="/new-book-save" method="post" >
-    <p>
-      <b>Title</b><br/>
-      <input type="text" id="title" name="title" placeholder="Enter book title" />
-      <span id="title-required" class="required-field-message"></span>
-    </p>
-    <p>
-      <b>Author</b><br/>
-      <input type="text" id="author" name="author" placeholder="Enter book author" />
-    </p>
-    <p>
-      <b>Year</b><br/>
-      <input type="text" id="year" name="year" value="<%= @book.year %>" />
-    </p>
-    <p>
-      <input type="submit" id="saveButton" name="saveButton" value="Save" />
-    </p>
-  </form>
-</body>
+  The value of the HTML INPUT elements will be send to the server
+  as part of the HTTP POST
+-->
+<form action="/new-book-save" method="post" >
+  <p>
+    <b>Title</b><br/>
+    <input type="text" id="title" name="title" placeholder="Enter book title" />
+    <span id="title-required" class="required-field-message"></span>
+  </p>
+  <p>
+    <b>Author</b><br/>
+    <input type="text" id="author" name="author" placeholder="Enter book author" />
+  </p>
+  <p>
+    <b>Year</b><br/>
+    <input type="text" id="year" name="year" value="<%= @book.year %>" />
+  </p>
+  <p>
+    <input type="submit" id="saveButton" name="saveButton" value="Save" />
+  </p>
+</form>

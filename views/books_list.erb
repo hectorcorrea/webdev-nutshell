@@ -1,22 +1,20 @@
-<body>
-  <header>
-    <h1>Book Catalog</h1>
-  </header>
+<header>
+  <h1>Book Catalog</h1>
+</header>
 
-  <p>
-    <a href="/new-book"><button>New Book</button></a>
-  </p>
+<p>
+  <a href="/new-book"><button>New Book</button></a>
+</p>
 
-  <% if @books.count == 0 %>
-    <p>There are no books in our library</p>
-  <% else %>
-    <p>A list of books</p>
-    <ul>
-      <% @books.each do |book| %>
-        <li>
-          <a href=books/<%= book.id %>> <%= book.title %></a>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</body>
+<% if @books.count == 0 %>
+  <p>There are no books in our library</p>
+<% else %>
+  <p>A list of books</p>
+  <ul>
+    <% @books.each do |book| %>
+      <li>
+        <a href=books/<%= book.id %>> <%= book.title %></a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
