@@ -340,7 +340,7 @@ If you are new to Ruby the [Ruby user's guide](https://ruby-doc.org/docs/ruby-do
 
 ## Server-side code with Ruby
 
-The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install two additional Ruby tools, or `gems` as they are known in the Ruby parlance:
+The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install three additional Ruby tools, or `gems` as they are known in the Ruby parlance:
 
 * [Sinatra](https://sinatrarb.com/) - a library for creating web applications in Ruby
 * [WEBrick](https://github.com/ruby/webrick) - a library that handles the HTTP plumbing
