@@ -696,3 +696,14 @@ Similarly to what we did with CSS, it is also possible to load external JavaScri
 ```
 
 however, the order in which JavaScript is loaded and executed is important and something that has to be kept in mind when loading from an external source from the `<head>...</head>` section of the page. If we load and execute the JavaScript before the HTML elements are rendered on the page the code won't be able to find them. There are many ways of working around this issue, and libraries like [jQuery](https://jquery.com/) take care of it rather nicely, just be aware of this.
+
+
+# Where do we go from here?
+
+All the work that we have done in this workshop creates a website that runs on our personal computer, and although it could be deployed to a server environment for the world to see and access, we do not cover deployment and hosting in this workshop.
+
+However, if you want to experiment creating a site that is available for the world to see you can use some of the free hosting platforms like [Glitch]( https://glitch.new/) or [GitHub pages](https://pages.github.com/). These platforms allow you to build simple sites with just HTML, CSS, and JavaScript and make it available to the world relatively easily.
+
+If you want to take it a bit further you could also [buy your own domain](https://dev.to/fastly/you-should-have-your-own-domain-23mp) and own your little corner of the web.
+
+This workshop uses Ruby for the backend portion of web development, but a lot of the ideas and concepts presented here apply to any backend programming language like Python, PHP, Java, or C#. If you are more comfortable with other programming languages give them a try.
