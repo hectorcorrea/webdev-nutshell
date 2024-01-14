@@ -33,6 +33,10 @@ class BookDatabase
     def to_json(*options)
       as_json(*options).to_json(*options)
     end
+
+    def to_s
+      "id: #{@id}, title: #{@title}, author: #{@author}"
+    end
   end
 
   #
