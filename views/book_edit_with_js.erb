@@ -1,6 +1,4 @@
-<header>
-  <h1>Editing Book (with JavaScript)</h1>
-</header>
+<h2>Editing Book (with JavaScript)</h2>
 <form action="/books/<%= @book.id %>/save" method="post" >
   <p>
     <b>Title</b><br/>
@@ -25,7 +23,6 @@
    * When the "saveButton" is clicked...
    */
   document.getElementById("saveButton").addEventListener("click", (event) => {
-
     const titleEl = document.getElementById("title");
     if (titleEl.value.trim() === "") {
       const messageEl = document.getElementById("title-required");
@@ -34,6 +31,5 @@
     } else {
       messageEl.innerHTML = "";
     }
-
   });
 </script>
