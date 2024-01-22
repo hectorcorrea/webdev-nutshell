@@ -1,8 +1,8 @@
 # Web development in a nutshell
-This repository contains the materials for the Web Development in a Nutshell workshop to be presented at [Wintersession 2024](https://winter.princeton.edu/).
-
+This repository contains the materials for the Web Development in a Nutshell.
 
 Most of the material for the workshop is available on [tutorial.md](https://github.com/hectorcorrea/webdev-nutshell/blob/main/tutorial.md) and the slides are available [here](https://docs.google.com/presentation/d/1dFwsNCUd7iTUzFKF7Po1DZ5KLFQ0t7qprB5VrCiABaM/edit#slide=id.g25432a504aa_0_0).
+
 
 ## Required software
 For this workshop you'll need to have a text editor and Ruby installed on your machine. The easiest way to get this done is by downloading and installing:
