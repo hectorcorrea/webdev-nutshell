@@ -1,0 +1,6 @@
+{
+    "name": "ruby-server-container",
+    "build": {
+        "dockerfile": "./Dockerfile"
+    }
+}
