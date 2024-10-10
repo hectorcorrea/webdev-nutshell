@@ -342,8 +342,8 @@ If you are new to Ruby the [Ruby user's guide](https://ruby-doc.org/docs/ruby-do
 
 The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install three additional Ruby tools, or `gems` as they are known in the Ruby parlance:
 
-* [Sinatra](https://sinatrarb.com/) - a library for creating web applications in Ruby
-* [WEBrick](https://github.com/ruby/webrick) - a library that handles the HTTP plumbing
+* [Sinatra](https://sinatrarb.com/) - library for creating web applications in Ruby
+* [Rackup](https://github.com/rack/rackup) - library that provides the web server interface
 * [Byebug](https://github.com/deivid-rodriguez/byebug) - a debugger for Ruby
 
 To install **Sinatra** run the following command from your VS Code Terminal window:
@@ -356,25 +356,27 @@ You'll see the following output
 
 ```
   > Fetching ...
-  > Fetching sinatra-3.1.0.gem
-  > Fetching rack-2.2.8.gem
-  > Successfully installed rack-2.2.8
-  > Successfully installed sinatra-3.1.0
-  > 6 gems installed
+  > Fetching sinatra-4.0.0.gem
+  > Fetching rack-3.1.7.gem
+  > Successfully installed rack-3.1.7
+  > Successfully installed sinatra-4.0.0
+  > 7 gems installed
 ```
 
-To install **WEBrick** run the following command on your Terminal window:
+To install **Rackup** run the following command on your Terminal window:
 
 ```
-gem install webrick
+gem install rackup
 ```
 
 You'll see the following output
 
 ```
-  > Fetching webrick-1.8.1.gem
-  > Successfully installed webrick-1.8.1
-  > 1 gem installed
+  > Fetching webrick-1.8.2.gem
+  > Fetching rackup-2.1.0.gem
+  > Successfully installed webrick-1.8.2
+  > Successfully installed rackup-2.1.0
+  > 2 gems installed
 ```
 
 To install **Byebug** run the following command on your Terminal window:
