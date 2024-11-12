@@ -340,43 +340,34 @@ If you are new to Ruby the [Ruby user's guide](https://ruby-doc.org/docs/ruby-do
 
 ## Server-side code with Ruby
 
-The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install three additional Ruby tools, or `gems` as they are known in the Ruby parlance:
+The goal of this workshop is to show you how to build a web application using Ruby. To do this we are going to install a few
+additional Ruby libraries (or `gems` as they are known in the Ruby parlance) that provide the plumbing needed for making a
+Ruby application available via the web:
 
 * [Sinatra](https://sinatrarb.com/) - library for creating web applications in Ruby
 * [Rackup](https://github.com/rack/rackup) - library that provides the web server interface
+* [Webrick](https://github.com/ruby/webrick) - library that provides the actual web server implementation
 * [Byebug](https://github.com/deivid-rodriguez/byebug) - a debugger for Ruby
 
-To install **Sinatra** run the following command from your VS Code Terminal window:
+To these gems run the following command from your VS Code Terminal window:
 
 ```
-gem install sinatra
+gem install sinatra rackup webrick
 ```
 
-You'll see the following output
+You'll see the following output:
 
 ```
   > Fetching ...
+  > Fetching rack-3.1.8.gem
   > Fetching sinatra-4.0.0.gem
-  > Fetching rack-3.1.7.gem
-  > Successfully installed rack-3.1.7
+  > Successfully installed rack-3.1.8
   > Successfully installed sinatra-4.0.0
-  > 7 gems installed
-```
-
-To install **Rackup** run the following command on your Terminal window:
-
-```
-gem install rackup
-```
-
-You'll see the following output
-
-```
-  > Fetching webrick-1.8.2.gem
-  > Fetching rackup-2.1.0.gem
-  > Successfully installed webrick-1.8.2
-  > Successfully installed rackup-2.1.0
-  > 2 gems installed
+  > Fetching rackup-2.2.0.gem
+  > Successfully installed rackup-2.2.0
+  > Fetching webrick-1.9.0.gem
+  > Successfully installed webrick-1.9.0
+  > 9 gems installed
 ```
 
 To install **Byebug** run the following command on your Terminal window:
