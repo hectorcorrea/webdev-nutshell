@@ -43,7 +43,7 @@ class BookDatabase
   # Returns all the records in the underlying JSON file
   def self.all
     text = "[]"
-    if File.exists?("books.json")
+    if File.exist?("books.json")
       text = File.read("books.json")
     end
     data = JSON.parse(text)
