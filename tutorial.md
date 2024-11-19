@@ -222,7 +222,7 @@ CSS provides many ways to layout pages: normal flow, flexbox, grids, and floats 
 File `css-column-layout.html` shows an example of how to use the [Multiple-column layout](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Multiple-column_Layout). File `css-grid-layout.html` shows an example of to use realize a common website layout using the [CSS Grid Layout](
 https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_common_layouts_using_grids)
 
-The talk [Everything You Know About Web Design Just Changed](https://www.youtube.com/watch?v=jBwBACbRuGY) by Jen Simmons is another resource to see how these layout are used and how they have evolved over the years.
+The talk [Everything You Know About Web Design Just Changed](https://www.youtube.com/watch?v=jBwBACbRuGY) by Jen Simmons is another resource to see how these layouts are used and have evolved over the years.
 
 
 ### CSS - using an external file
