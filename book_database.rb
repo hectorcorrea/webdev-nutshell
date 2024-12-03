@@ -5,15 +5,17 @@
 # `find` a record by id, `add` a new record, and `update`
 # the information of an existing record.
 #
-# This approach is NOT a good idea for real systems,
+# This database approach is NOT a good idea for real systems,
 # but it is good enough the purposes of this workshop.
 #
+require "securerandom"
+
 class BookDatabase
 
   # This class represents a single book
   class Book
     attr_accessor :id, :title, :author, :year
-    def initialize(id: 0, title: "", author: "", year: Time.now.year)
+    def initialize(id: "", title: "", author: "", year: Time.now.year)
       @id = id
       @title = title
       @author = author
@@ -54,7 +56,7 @@ class BookDatabase
   #
   # Finds one record by id
   def self.find(id)
-    book = all.find { |book| book.id == id.to_i }
+    book = all.find { |book| book.id == id }
   end
 
   #
@@ -85,7 +87,7 @@ class BookDatabase
     books = all
     books.each do |book|
       # ...if this record has the id that was provided
-      if book.id == id.to_i
+      if book.id == id
         # ... update it
         book.title = title
         book.author = author
@@ -102,12 +104,6 @@ class BookDatabase
   #
   # Calculates the id for a new book
   def self.get_new_book_id
-    books = all
-    if books.count == 0
-      return 1
-    end
-
-    latest_book = books.max_by { |book| book.id }
-    return latest_book.id + 1
+    SecureRandom.hex
   end
 end
