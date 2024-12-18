@@ -29,7 +29,8 @@ git clone https://github.com/hectorcorrea/webdev-nutshell.git
 
 2. If you don't have Git installed you can download this repository as a zip file and unzip it:
 
-* Point your browser to https://github.com/hectorcorrea/webdev-nutshell/archive/refs/heads/main.zip
+* To download the file, point your browser to https://github.com/hectorcorrea/webdev-nutshell/archive/refs/heads/main.zip
+* **Note:** By default the file will be downloaded to the `~/Downloads` folder. VSCode does not always plays nice with files on this folder, I recommend you move the downloaded file to your home directory `~/`
 * Unzip the downloaded file `webdev-nutshell-main.zip`
 
 
