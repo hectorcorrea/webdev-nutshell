@@ -615,6 +615,8 @@ This method does three things:
 2. Then it calls the `BookDatabase.add()` method to add a new the record to our database.
 3. And at the end it sends the user to the "details page" for the particular book that they just added (in HTTP lingo, it redirects them).
 
+**NOTE:** The example in `webdemo3_books.rb` uses a fake database via `book_database.rb`. The use of a fake database is to keep the examples in this workshop simple and to reduce the number of external dependencies needed to run the demos. In a real application you will likely want to use a database like [MySQL](https://www.mysql.com/) or PostgreSQL(https://www.postgresql.org/) to store and retrieve data for your web applications.
+
 
 # JavaScript (on the client-side)
 Another common technology that is used in most web pages is JavaScript (JS). JavaScript is a programming language that we can embed in our HMTL files to add dynamic functionality to the page.
