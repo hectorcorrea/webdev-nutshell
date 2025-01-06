@@ -679,3 +679,8 @@ However, if you want to experiment creating a site that is available for the wor
 If you want to take it a bit further you could also [buy your own domain](https://dev.to/fastly/you-should-have-your-own-domain-23mp) and own your little corner of the web.
 
 This workshop uses Ruby for the backend portion of web development, but a lot of the ideas and concepts presented here apply to any backend programming language like Python, PHP, Java, or C#. For example, take a look at the documentation on how to build a [minimal web application with Python using Flask](https://flask.palletsprojects.com/en/3.0.x/quickstart/#a-minimal-application) (Flask is similar to Sinatra but is for Python applications) and notice the similarities in the concepts to what we learned in this workshop.
+
+
+# Acknowledgements
+
+A special thank you goes to [Claudia Lee](https://github.com/claudiawulee) for helping me test the initial examples and validate that they work on Windows environments and to [Robert-Anthony Lee-Faison](https://github.com/leefaisonr) for helping me prepare the workshop and present it at Wintersession 2025.
