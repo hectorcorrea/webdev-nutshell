@@ -370,21 +370,6 @@ You'll see the following output:
   > 9 gems installed
 ```
 
-To install **Byebug** run the following command on your Terminal window:
-
-```
-gem install byebug
-```
-
-You'll see the following output
-
-```
-  > Fetching byebug-11.1.3.gem
-  > Building native extensions. This could take a while...
-  > Successfully installed byebug-11.1.3
-  > 1 gem installed
-```
-
 Now that we have these `gems` installed we can run our first web application in Ruby:
 
 ```
